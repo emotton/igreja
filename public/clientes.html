@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Clientes</title>
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
+    <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+</head>
+<body>
+    <div class="container jumbotron">
+        <table border="1" style="width: 500px">
+            <thead>
+                <td>Nome</td>
+            </thead>
+            <tbody id="lista">
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+<script>
+$(document).ready(function(){
+    var tabelaLista = $("#lista");
+    $.ajax({
+        dataType: "json",
+        url: '/cliente/list',
+        success: function(data){
+            $.each( data, function( index, cliente ) {
+                $(tabelaLista).append('<tr><td>'+cliente.nome+'</td></tr>');
+            });
+        }
+    });
+});
+</script>
