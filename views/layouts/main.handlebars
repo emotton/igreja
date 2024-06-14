@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../lib/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <script src="../../lib/jquery/dist/jquery.slim.js"></script>
+    <script src="../../lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../../lib/chart.js/dist/Chart.js"></script>
+    <link rel="stylesheet" href="../../lib/chart.js/dist/Chart.css">
+    <script src="../../lib/date.js/build/date.js"></script>
+    <script src="../../lib/date.js/build/date-pt-BR.js"></script>
+    <script src="../../js/timer-logout.js"></script>
+    <title>Dashboard</title>
+</head>
+
+<body>
+    {{>_navbar}}
+    <div class="containerx mt-1">
+        {{#if error}}
+        <div class="alert alert-danger">{{error}}</div>
+        {{else}}
+        {{/if}}
+        {{{body}}}
+    </div>
+    <footer class="rodape">
+        <div class="rodape-content">
+            <hr class="linha">
+            <b>São Pio Tech Informática</b>
+            <hr class="linha">
+            <span>Versão 1.0.0</span>
+        </div>
+    </footer>
+</body>
+</html>
