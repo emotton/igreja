@@ -1,6 +1,6 @@
 {
-  "name": "04_EXPRESS",
-  "description": "Express",
+  "name": "DASHBOARD",
+  "description": "DASHBOARD",
   "main": "index.js",
   "license": "ISC",
   "homepage": "",
@@ -8,11 +8,14 @@
     "**/.*",
     "node_modules",
     "bower_components",
+    "public/lib/",
     "test",
     "tests"
   ],
   "dependencies": {
-    "jquery": "^3.3.1",
-    "bootstrap": "^4.3.1"
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.4.0",
+    "chart.js": "^2.8.0",
+    "date.js": "*"
   }
 }
