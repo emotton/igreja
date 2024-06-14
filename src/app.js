@@ -63,11 +63,13 @@ var hbs = handlebars.create({
 
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
-app.set("views", "./views");
+app.set("views", "views");
 
 // public
-app.use(express.static(path.join(__dirname, "public")));
-app.use(favicon(path.join(__dirname, "public", "images", "icon-digicon.GIF")));
+app.use(express.static(path.join(__dirname, "../public")));
+app.use(
+  favicon(path.join(__dirname, "../public", "images", "icon-digicon.GIF"))
+);
 
 // Rotas
 
