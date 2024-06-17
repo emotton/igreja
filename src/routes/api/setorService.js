@@ -1,4 +1,4 @@
-const { client } = require("./db");
+const { client } = require("../../services/db");
 
 async function selectSetores() {
   const res = await client.query("SELECT * FROM setor");

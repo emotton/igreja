@@ -1,0 +1,52 @@
+<div id="frmUsuarioAlterar" class="dash-form mt-5">
+  <div class="row">
+    <div
+      class="col-sm-12 mx-auto bg-white rounded shadow table-striped dash-form"
+    >
+      <div class="titulo-form">
+        <img src="/images/edit-64.png" />
+        <h3>Alterar</h3>
+      </div>
+      <form action="/dashboard/usuario/update" method="post">
+        <label for="id_usuario"># ID:</label>
+        <input
+          type="text"
+          id="id_usuario"
+          name="id_usuario"
+          class="form-control"
+          value="{{usuario.id_usuario}}"
+          readonly
+        />
+        <label for="nome">Nome:</label>
+        <input
+          type="text"
+          id="nome"
+          name="nome"
+          class="form-control maskIDVAL"
+          value="{{usuario.nome}}"
+        />
+        <label for="login">Login:</label>
+        <input
+          type="text"
+          id="login"
+          name="login"
+          class="form-control maskIDSAM"
+          value="{{usuario.login}}"
+        />
+        <label for="senha">Senha:</label>
+        <input
+          type="text"
+          id="senha"
+          name="senha"
+          class="form-control maskIDSAM"
+          value="{{usuario.senha}}"
+        />
+        <br />
+        <div class="text-center">
+          <button class="btn btn-primary" type="reset">Cancelar</button>
+          <button class="btn btn-primary" type="submit">Alterar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

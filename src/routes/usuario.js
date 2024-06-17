@@ -1,33 +1,45 @@
 const express = require("express");
 const router = express.Router();
 
-const usuarioService = require("../services/usuarioService");
+const axios = require("axios");
+
+const prefixUrl = "http://localhost:3000/";
+const apiUrl = "dashboard/api/usuario";
+const baseUrl = "dashboard/usuario";
 
 const { logged } = require("../helpers/logged");
 
-router.get("/", logged, async (req, res) => {
-  const results = await usuarioService.selectUsuarios();
-  res.json(results);
+router.get("/reset", logged, (req, res) => {
+  req.session.searchIdUsuario = undefined;
+  res.redirect("/" + baseUrl + "/list");
 });
 
-router.get("/:id", logged, async (req, res) => {
-  const results = await usuarioService.selectUsuarioById(req.params.id);
-  res.json(results);
+router.get("/:id", logged, (req, res) => {
+  let search = req.session.searchIdUsuario;
+
+  axios.get(prefixUrl + apiUrl + req.params.id).then((usu) => {
+    res.render(baseUrl + "/consultar", {
+      usuarios: usu.data,
+      search: search,
+      anchor: "cadastro",
+    });
+  });
 });
 
-router.post("/", logged, async (req, res) => {
-  const results = await usuarioService.insertUsuario(req.body);
-  res.sendStatus(201);
-});
+router.get("/", logged, (req, res) => {
+  let search = req.query.search
+    ? req.query.search
+    : req.session.searchIdUsuario;
 
-router.patch("/:id", logged, async (req, res) => {
-  const results = await usuarioService.updateUsuario(req.params.id, req.body);
-  res.sendStatus(200);
-});
+  req.session.searchIdUsuario = search;
 
-router.delete("/:id", logged, async (req, res) => {
-  const results = await usuarioService.deleteUsuario(req.params.id);
-  res.sendStatus(204);
+  axios.get(prefixUrl + apiUrl).then((usu) => {
+    res.render(baseUrl + "/consultar", {
+      usuarios: usu.data,
+      search: search,
+      anchor: "cadastro",
+    });
+  });
 });
 
 module.exports = router;

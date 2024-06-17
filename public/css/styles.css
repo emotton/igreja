@@ -1,6 +1,7 @@
 /* RESET */
 
-* {
+html,
+body {
     margin: 0;
     padding: 0;
     font-size: 100%;
@@ -17,16 +18,24 @@ a {
     text-decoration: none;
     cursor: pointer;
     opacity: 0.9;
+    color: #ea0506;
 }
 
 a:hover {
     opacity: 1;
+    color: #ea0506;
 }
 
 h1,
 h3 {
-    color: red;
+    color: #ea0506;
     font-size: 1.1rem;
+    font-weight: bold;
+}
+
+h4 {
+    color: #ea0506;
+    font-size: 0.9rem;
     font-weight: bold;
 }
 
@@ -46,7 +55,7 @@ h3 {
 .cardLogin {
     margin: 0 auto;
     float: none;
-    margin-bottom: 10px;
+    padding: 15px;
 }
 
 .login {
@@ -54,6 +63,11 @@ h3 {
     border-color: #333;
     border-style: groove;
     width: 22rem;
+    margin-top: 140px;
+}
+
+.user {
+    color: blanchedalmond;
 }
 
 .barraData {
@@ -69,21 +83,230 @@ h3 {
     width: 50px;
 }
 
-.dashboard {
+.tela {
     display: flex;
     flex-wrap: wrap;
     align-content: space-around;
     justify-content: space-around;
+    flex-direction: column;
+}
+
+.conteudo {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+.dash-full {
+    width: 100%;
+    padding: 5px;
 }
 
 .dash-item {
-    flex-basis: 49%;
+    width: calc(50% - 10px);
+    padding: 15px;
+}
+
+.dash-versoes {
+    display: none;
+    width: 30%;
+    padding: 15px;
+    position: absolute;
+    margin: 0 auto;
+    padding: 10px;
+    width: 380px;
+    height: 550px;
+    left: calc(50% - 190px);
+    top: calc(50% - 250px);
+    background-color: white;
+    z-index: 9999;
     border-radius: 2rem;
-    border-color: #333;
+    border-color: red;
     border-style: groove;
-    border-width: 0.1rem;
+    animation: move-down 1s;
+    animation-fill-mode: backwards;
+}
+
+.table-versoes>tbody,
+.table-historico>tbody {
+    flex: 1 1 auto;
+    display: block;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 400px;
+}
+
+.dash-interno {
+    padding: 15px;
+}
+
+.pref-filtro {
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.pref-filtro-item {
+    width: 100px;
+}
+
+.pref-filtro-item p {
+    text-align: center;
+}
+
+figcaption {
+    font-size: 0.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.imgBus {
+    /* filter: brightness(85%); */
+}
+
+img {
+    filter: saturate(200%);
+}
+
+.ImglockScreen input[type="checkbox"] {
+    display: none;
+}
+
+.unlocked {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    background-image: url('../images/unlock-32.png');
+}
+
+.locked {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    background-image: url('../images/locked-32.png');
+}
+
+​.titulo-lista {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    margin: 15px;
+    color: #ea0506;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.titulo-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin: 15px;
+    color: #ea0506;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.dash-form {
+    width: calc(50% - 10px);
+    padding: 15px;
+    height: 586px;
+    margin-right: 10px;
+}
+
+.dash-config {
+    background-color: black;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    padding: 15px;
+}
+
+.dash-column {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 120px;
+    height: 28px;
+    background-color: #333;
+    border-radius: 2rem;
+    border-color: #daa520;
+    border-style: groove;
+    border-width: 0.1rem;
+}
+
+.traffic {
+    display: flex;
+    flex-direction: column;
+    width: 12px;
+    height: 32px;
+}
+
+.checked {
+    width: 16px;
+    height: 16px;
+    background-image: url('../images/checked-16.png');
+    background-repeat: no-repeat;
+}
+
+.dash-config>div>span {
+    height: 16px;
+    font-size: 0.8rem;
+    color: #fff;
+    text-align: center;
+}
+
+.form {
+    overflow: auto;
+    height: 410px;
+}
+
+caption {
+    caption-side: top;
+    color: #ea0506;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: right;
+}
+
+table {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    padding: 1px 0px 0px 0px;
+    margin: 5px;
+}
+
+thead {
+    flex: 0 0 auto;
+    margin-left: 10px;
+}
+
+tbody {
+    flex: 1 1 auto;
+    display: block;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 432px;
+}
+
+tr {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    padding: 0px 0px 1px 5px;
+}
+
+td {
+    font-family: Arial;
+    font-size: 10pt;
 }
 
 .prefs {
@@ -233,44 +456,6 @@ h3 {
     background-color: #8ce196;
 }
 
-table {
-    background-color: #fff;
-    width: 100%;
-}
-
-table thead {
-    background-color: #333;
-    color: #fff;
-    height: 40px;
-}
-
-table tbody tr {
-    border-bottom: 1px solid #999;
-}
-
-table thead tr {
-    display: block;
-    position: relative;
-}
-
-table tbody {
-    display: block;
-    overflow: auto;
-    height: 300px;
-}
-
-tr:nth-of-type(even) {
-    background: #eee;
-}
-
-th {
-    font-size: 1em;
-}
-
-td {
-    font-size: 0.8em;
-}
-
 #cartoesGrafico {
     width: 600px;
 }
@@ -331,75 +516,310 @@ td {
 }
 
 @media(max-width: 1250px) {
-    .containerx {
-        flex-direction: column;
-    }
-    .dashboard {
-        flex-direction: column;
-        align-items: center;
-    }
     .dash-item {
         flex-basis: 100%;
-        width: 90%;
+        width: 97%;
         margin-left: 5px;
         margin-right: 5px;
         margin-bottom: 5px;
     }
-    table {
-        width: 100%;
+    .dash-form {
+        flex-basis: 100%;
+        width: 97%;
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-bottom: 5px;
     }
-    table tbody {
-        height: 290px;
+    .dash-versoes {
+        height: 350px;
     }
-    #cartoesGrafico,
-    #emissaoDiasGrafico,
-    #diarioProdutoGrafico {
-        width: 100%;
-    }
-    #cartoesGraficoImg,
-    #emissaoDiasGraficoImg,
-    #diarioProdutoGraficoImg {
-        width: 90%;
-    }
-    .prefs-item {
-        flex-basis: 98%;
+    .table-versoes>tbody {
+        height: 200px;
     }
 }
 
-@media(max-width: 550px) {
-    .containerx {
-        flex-direction: column;
-    }
-    .dashboard {
-        flex-direction: column;
-        align-items: center;
-    }
+@media(max-width: 576px) {
     .dash-item {
         flex-basis: 100%;
+        width: 97%;
         margin-left: 5px;
         margin-right: 5px;
         margin-bottom: 5px;
     }
-    table {
-        width: 330px;
+    .dash-form {
+        flex-basis: 100%;
+        width: 97%;
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-bottom: 5px;
     }
-    table tbody {
-        height: 290px;
+    .dash-config>div>span {
+        font-size: 0.5rem;
+        color: #fff;
+        text-align: center;
     }
-    th {
-        font-size: 0.6em;
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+    }
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    tr {
+        border: 1px solid #ccc;
     }
     td {
-        font-size: 0.5em;
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 200px;
+        margin-left: 100px;
     }
-    #cartoesGrafico,
-    #emissaoDiasGrafico,
-    #diarioProdutoGrafico {
-        width: 330px;
+    td:before {
+        position: absolute;
+        top: 12px;
+        left: 6px;
+        width: 200%;
+        padding-right: 40px;
+        white-space: nowrap;
+        margin-left: -80px;
+        font-weight: bold;
     }
-    #cartoesGraficoImg,
-    #emissaoDiasGraficoImg,
-    #diarioProdutoGraficoImg {
-        width: 330px;
+    /* Equipamentos */
+    .table-equip>tbody>tr>td:nth-of-type(1):before {
+        content: "ID:";
     }
+    .table-equip>tbody>tr>td:nth-of-type(2):before {
+        content: "ID VAL:";
+    }
+    .table-equip>tbody>tr>td:nth-of-type(3):before {
+        content: "SAM:";
+    }
+    .table-equip>tbody>tr>td:nth-of-type(4):before {
+        content: "Modelo:";
+    }
+    .table-equip>tbody>tr>td:nth-child(5),
+    .table-equip>tbody>tr>td:nth-child(6),
+    .table-equip>tbody>tr>td:nth-child(7) {
+        float: left;
+        width: 50px;
+        padding-left: 10px;
+        margin-left: 50px;
+    }
+    /* Modelo de equipamentos */
+    .table-modequip>tbody>tr>td:nth-of-type(1):before {
+        content: "ID:";
+    }
+    .table-modequip>tbody>tr>td:nth-of-type(2):before {
+        content: "Nome:";
+    }
+    .table-modequip>tbody>tr>td:nth-child(3),
+    .table-modequip>tbody>tr>td:nth-child(4),
+    .table-modequip>tbody>tr>td:nth-child(5) {
+        float: left;
+        width: 50px;
+        padding-left: 10px;
+        margin-left: 50px;
+    }
+    /* Roteador */
+    .table-roteador>tbody>tr>td:nth-of-type(1):before {
+        content: "ID:";
+    }
+    .table-roteador>tbody>tr>td:nth-of-type(2):before {
+        content: "Nome:";
+    }
+    .table-roteador>tbody>tr>td:nth-child(3),
+    .table-roteador>tbody>tr>td:nth-child(4),
+    .table-roteador>tbody>tr>td:nth-child(5) {
+        float: left;
+        width: 50px;
+        padding-left: 10px;
+        margin-left: 50px;
+    }
+    /* Veiculos */
+    .table-veiculo>tbody>tr>td:nth-of-type(1):before {
+        content: "ID:";
+    }
+    .table-veiculo>tbody>tr>td:nth-of-type(2):before {
+        content: "Prefixo:";
+    }
+    .table-veiculo>tbody>tr>td:nth-of-type(3):before {
+        content: "IP:";
+    }
+    .table-veiculo>tbody>tr>td:nth-child(4),
+    .table-veiculo>tbody>tr>td:nth-child(5),
+    .table-veiculo>tbody>tr>td:nth-child(6),
+    .table-veiculo>tbody>tr>td:nth-child(7),
+    .table-veiculo>tbody>tr>td:nth-child(8) {
+        float: left;
+        width: 30px;
+        padding-left: 10px;
+        margin-left: 40px;
+    }
+    /* Usuários */
+    .table-usuario>tbody>tr>td:nth-of-type(1):before {
+        content: "ID:";
+    }
+    .table-usuario>tbody>tr>td:nth-of-type(2):before {
+        content: "Nome:";
+    }
+    .table-usuario>tbody>tr>td:nth-of-type(3):before {
+        content: "Login:";
+    }
+    .table-usuario>tbody>tr>td:nth-child(4),
+    .table-usuario>tbody>tr>td:nth-child(5),
+    .table-usuario>tbody>tr>td:nth-child(6) {
+        float: left;
+        width: 50px;
+        padding-left: 10px;
+        margin-left: 50px;
+    }
+    /* Arquivos */
+    .table-arquivos>tbody>tr>td:nth-of-type(1):before {
+        content: "Versão:";
+    }
+    .table-arquivos>tbody>tr>td:nth-of-type(2):before {
+        content: "Arquivo:";
+    }
+    /* Versões */
+    .table-versoes>tbody>tr>td:nth-of-type(1):before {
+        content: "Arquivo:";
+    }
+    .table-versoes>tbody>tr>td:nth-of-type(2):before {
+        content: "Versão:";
+    }
+    .table-versoes>tbody>tr>td:nth-of-type(3):before {
+        content: "Data:";
+    }
+    /* Histórico */
+    .table-historico>tbody>tr>td:nth-of-type(1):before {
+        content: "Versão:";
+    }
+    .table-historico>tbody>tr>td:nth-of-type(2):before {
+        content: "Data:";
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+div.login {
+    animation-name: fade;
+    animation-duration: 500ms;
+}
+
+@keyframes move {
+    from {
+        opacity: 0;
+        transform: translateX(-135%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+
+form {
+    overflow: hidden;
+}
+
+.input-block:nth-child(1) {
+    animation: move 500ms;
+    animation-delay: 550ms;
+    animation-fill-mode: backwards;
+}
+
+.input-block:nth-child(2) {
+    animation: move 500ms;
+    animation-delay: 200ms;
+    animation-fill-mode: backwards;
+}
+
+@keyframes move-down {
+    from {
+        opacity: 0;
+        transform: translateY(-135%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}
+
+button.button-block {
+    animation: move 1500ms;
+    animation-delay: 800ms;
+    animation-fill-mode: backwards;
+}
+
+.search {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.search input {
+    width: 150px;
+}
+
+.search form {
+    width: 250px;
+    display: flex;
+}
+
+.search button {
+    background-image: url('../images/filter-32.png');
+    background-repeat: no-repeat;
+    height: 37px;
+    width: 37px;
+}
+
+.container-alert {
+    position: absolute;
+    margin: 0 auto;
+    padding: 10px;
+    width: 380px;
+    height: 250px;
+    left: calc(50% - 190px);
+    top: calc(50% - 110px);
+    background-color: white;
+    z-index: 9999;
+    border-radius: 2rem;
+    border-color: red;
+    border-style: groove;
+    animation: move-down 1s;
+    /* animation-delay: 800ms; */
+    animation-fill-mode: backwards;
+}
+
+.alert {
+    left: 0;
+    width: 100%;
+    border: none;
+    margin: 0px;
+}
+
+.alert>span {
+    color: #ea0506;
+}
+
+.container-alert>h3 {
+    background-color: #ea0506;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
 }

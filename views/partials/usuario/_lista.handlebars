@@ -1,0 +1,75 @@
+<div class="dash-item mt-5">
+  <div class="titulo-lista">
+    <div class="search">
+      <span><a href="/dashboard/usuario/list">Usuários</a></span>
+      <form method="GET" action="/dashboard/usuario/list">
+        <input
+          type="text"
+          id="search"
+          name="search"
+          class="form-control"
+          value="{{search}}"
+          placeholder="nome"
+        />
+        <button type="submit" id="btn-search"></button>
+        <a href="/dashboard/usuario/reset">
+          <img
+            src="/images/eraser-32.png"
+            alt="Remover filtro"
+            title="Remover filtro"
+          />
+        </a>
+      </form>
+      <a href="/dashboard/usuario/list#cadastro"><img
+          src="/images/add-32.png"
+          alt="Novo"
+          title="Novo"
+        /></a>
+    </div>
+  </div>
+  <div class="mx-auto bg-white rounded shadow">
+    <table class="table table-fixed table-striped table-equip">
+      <thead class="thead-dark">
+        <tr class="row">
+          <th class="col-sm-1">#</th>
+          <th class="col-sm-4">Nome</th>
+          <th class="col-sm-4">Login</th>
+          <th class="col-sm-3" colspan="3">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each usuarios}}
+          <tr class="row">
+            <td class="col-sm-1">{{id_usuario}}</td>
+            <td class="col-sm-4">{{nome}}</td>
+            <td class="col-sm-4">{{login}}</td>
+            <td class="col-sm-1">
+              <a href="/dashboard/usuario/{{id_usuario}}">
+                <img
+                  src="/images/view-32.png"
+                  alt="Consultar"
+                  title="Consultar"
+                />
+              </a>
+            </td>
+            <td class="col-sm-1">
+              <a href="/dashboard/usuario/edit/{{id_usuario}}">
+                <img src="/images/edit-32.png" alt="Alterar" title="Alterar" />
+              </a>
+            </td>
+            <td class="col-sm-1">
+              <a href="/dashboard/usuario/delete/{{id_usuario}}">
+                <img
+                  src="/images/delete-32.png"
+                  alt="Excluir"
+                  title="Excluir"
+                />
+              </a>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    <br />
+  </div>
+</div>

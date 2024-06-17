@@ -1,0 +1,28 @@
+<div id="frmUsuarioIncluir" class="dash-form mt-5">
+  <div class="row form-group">
+    <div
+      class="col-sm-12 mx-auto bg-white rounded shadow table-striped dash-form"
+    >
+      <div class="titulo-form">
+        <img src="/images/add-64.png" />
+        <h3>Incluir</h3>
+      </div>
+      <fieldset class="form-group">
+        <form action="/dashboard/usuario/save" method="post">
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" name="nome" class="form-control" />
+          <label for="login">Login:</label>
+          <input type="text" id="login" name="login" class="form-control" />
+          <label for="senha">Senha:</label>
+          <input type="password" id="senha" name="senha" class="form-control" />
+          <br />
+          <br />
+          <div class="text-center">
+            <button class="btn btn-primary" type="reset">Cancelar</button>
+            <button class="btn btn-primary" type="submit">Incluir</button>
+          </div>
+        </form>
+      </fieldset>
+    </div>
+  </div>
+</div>
