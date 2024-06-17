@@ -3,27 +3,29 @@ const router = express.Router();
 
 const usuarioService = require("../services/usuarioService");
 
-router.get("/", async (req, res) => {
+const { logged } = require("../helpers/logged");
+
+router.get("/", logged, async (req, res) => {
   const results = await usuarioService.selectUsuarios();
   res.json(results);
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", logged, async (req, res) => {
   const results = await usuarioService.selectUsuarioById(req.params.id);
   res.json(results);
 });
 
-router.post("/", async (req, res) => {
+router.post("/", logged, async (req, res) => {
   const results = await usuarioService.insertUsuario(req.body);
   res.sendStatus(201);
 });
 
-router.patch("/:id", async (req, res) => {
+router.patch("/:id", logged, async (req, res) => {
   const results = await usuarioService.updateUsuario(req.params.id, req.body);
   res.sendStatus(200);
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", logged, async (req, res) => {
   const results = await usuarioService.deleteUsuario(req.params.id);
   res.sendStatus(204);
 });

@@ -13,6 +13,8 @@ const flash = require("connect-flash");
 const login = require("./routes/login");
 const home = require("./routes/home");
 const usuario = require("./routes/usuario");
+const setor = require("./routes/setor");
+const familia = require("./routes/familia");
 
 const app = express();
 
@@ -87,6 +89,8 @@ app.get("/dashboard", (req, res) => {
 app.use("/dashboard/login", login);
 app.use("/dashboard/home", home);
 app.use("/dashboard/usuario", usuario);
+app.use("/dashboard/setor", setor);
+app.use("/dashboard/familia", familia);
 
 const PORT = process.env.PORT;
 
