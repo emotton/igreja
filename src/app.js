@@ -1,3 +1,4 @@
+require("dotenv").config();
 // Carregando modulos
 const express = require("express");
 const handlebars = require("express-handlebars");
@@ -10,6 +11,7 @@ const flash = require("connect-flash");
 
 // rotas
 const login = require("./routes/login");
+const usuario = require("./routes/usuario");
 
 const app = express();
 
@@ -82,8 +84,9 @@ app.get("/dashboard", (req, res) => {
 });
 
 app.use("/dashboard/login", login);
+app.use("/dashboard/usuario", usuario);
 
-const PORT = 3000;
+const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
   console.log(`Server started on ${PORT}`);
