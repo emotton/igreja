@@ -14,6 +14,7 @@ module.exports = function (passport) {
           if (usu.length > 0) {
             usuario = {
               id: usu[0].id_usuario,
+              nome: usu[0].nome,
               login: usu[0].login,
               senha: usu[0].senha,
             };
@@ -42,6 +43,7 @@ module.exports = function (passport) {
     usuarioService.selectUsuarioById(id).then((usu) => {
       usuario = {
         id: usu[0].id_usuario,
+        nome: usu[0].nome,
         login: usu[0].login,
         senha: usu[0].senha,
       };
