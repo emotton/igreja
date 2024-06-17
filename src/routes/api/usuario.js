@@ -10,9 +10,9 @@ router.get("/", async (req, res) => {
   res.json(results);
 });
 
-router.get("/:id", logged, async (req, res) => {
+router.get("/:id", async (req, res) => {
   const results = await usuarioService.selectUsuarioById(req.params.id);
-  res.json(results);
+  res.json(results[0]);
 });
 
 router.post("/", logged, async (req, res) => {
