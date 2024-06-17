@@ -19,4 +19,29 @@ async function selectUsuarioByLogin(login) {
   return res[0];
 }
 
-module.exports = { selectUsuarios, selectUsuarioById, selectUsuarioByLogin };
+async function insertUsuario(usuario) {
+  const sql = "INSERT INTO usuario(nome,login,senha) VALUES (?,?,?);";
+  const values = [usuario.nome, usuario.login, usuario.senha];
+  await client.query(sql, values);
+}
+
+async function updateUsuario(id, usuario) {
+  const sql = "UPDATE usuario set nome=?,login=?,senha=? WHERE id_usuario = ?";
+  const values = [usuario.nome, usuario.login, usuario.senha, id];
+  await client.query(sql, values);
+}
+
+async function deleteUsuario(id) {
+  const sql = "DELETE FROM usuario WHERE id_usuario = ?";
+  const values = [id];
+  await client.query(sql, values);
+}
+
+module.exports = {
+  selectUsuarios,
+  selectUsuarioById,
+  selectUsuarioByLogin,
+  insertUsuario,
+  updateUsuario,
+  deleteUsuario,
+};
