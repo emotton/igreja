@@ -16,7 +16,7 @@
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       {{#if user}}
         <li class="nav-item active">
-          <a class="nav-link" href="/dashboard/bilhetagem">Bilhetagem</a>
+          <a class="nav-link" href="/dashboard/dizimo">Dízimo</a>
         </li>
         <li class="nav-item dropdown">
           <a
@@ -26,15 +26,31 @@
             aria-haspopup="true"
             aria-expanded="false"
             href="#"
-          >BP-e</a>
+          >Cadastros</a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li class="nav-item">
-              <a class="dropdown-item" href="/dashboard/bpe/mensal">BP-e
-                (Mensal)</a>
+              <a
+                class="dropdown-item"
+                href="/dashboard/cadastro/usuario"
+              >Usuário</a>
             </li>
             <li class="nav-item">
-              <a class="dropdown-item" href="/dashboard/bpe/diario">BP-e
-                (Diário)</a>
+              <a
+                class="dropdown-item"
+                href="/dashboard/cadastro/dizimista"
+              >Dizimista</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="dropdown-item"
+                href="/dashboard/cadastro/familia"
+              >Família</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="dropdown-item"
+                href="/dashboard/cadastro/setor"
+              >Setor</a>
             </li>
           </ul>
         </li>

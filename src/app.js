@@ -11,6 +11,7 @@ const flash = require("connect-flash");
 
 // rotas
 const login = require("./routes/login");
+const home = require("./routes/home");
 const usuario = require("./routes/usuario");
 
 const app = express();
@@ -84,6 +85,7 @@ app.get("/dashboard", (req, res) => {
 });
 
 app.use("/dashboard/login", login);
+app.use("/dashboard/home", home);
 app.use("/dashboard/usuario", usuario);
 
 const PORT = process.env.PORT;

@@ -1,37 +1,35 @@
 const localStrategy = require("passport-local").Strategy;
-// const acesso = require("../services/acesso");
-// const acessoByID = require("../services/acessoByID");
+const usuarioService = require("../services/usuarioService");
 const crypto = require("crypto");
 
 module.exports = function (passport) {
   passport.use(
     new localStrategy(
       {
-        usernameField: "email",
+        usernameField: "login",
         passwordField: "senha",
       },
-      (email, senha, done) => {
-        /*
-        acesso.get(email).then((usu) => {
-          usu = usu[0];
-
-          let hash = crypto.createHash("md5").update(senha).digest("hex");
-
-          if (hash == usu.VC_SENHA) {
+      (login, senha, done) => {
+        usuarioService.selectUsuarioByLogin(login).then((usu) => {
+          if (usu.length > 0) {
             usuario = {
-              id: usu.NI_IDUSUARIO,
-              email: usu.VC_USUARIO,
-              senha: usu.VC_SENHA,
+              id: usu[0].id_usuario,
+              login: usu[0].login,
+              senha: usu[0].senha,
             };
-
-            return done(null, usuario);
+            if (senha == usuario.senha) {
+              return done(null, usuario);
+            } else {
+              return done(null, false, {
+                message: "Usuário/senha incorretos",
+              });
+            }
           } else {
             return done(null, false, {
               message: "Usuário/senha incorretos",
             });
           }
         });
-        */
       }
     )
   );
@@ -41,11 +39,11 @@ module.exports = function (passport) {
   });
 
   passport.deserializeUser((id, done) => {
-    acessoByID.get(id).then((usu) => {
+    usuarioService.selectUsuarioById(id).then((usu) => {
       usuario = {
-        id: usu[0].NI_IDUSUARIO,
-        email: usu[0].VC_USUARIO,
-        senha: usu[0].VC_SENHA,
+        id: usu[0].id_usuario,
+        login: usu[0].login,
+        senha: usu[0].senha,
       };
       done(null, usuario);
     });
