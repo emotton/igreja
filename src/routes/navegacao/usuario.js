@@ -7,7 +7,7 @@ const prefixUrl = "http://localhost:3000/";
 const apiUrl = "dashboard/api/usuario";
 const baseUrl = "dashboard/usuario";
 
-const { logged } = require("../helpers/logged");
+const { logged } = require("../../helpers/logged");
 
 router.get("/reset", logged, (req, res) => {
   req.session.searchIdUsuario = undefined;

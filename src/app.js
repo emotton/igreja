@@ -9,10 +9,12 @@ const session = require("express-session");
 const MemoryStore = require("memorystore")(session);
 const flash = require("connect-flash");
 
-// rotas
-const login = require("./routes/login");
-const home = require("./routes/home");
-const usuario = require("./routes/usuario");
+// rotas de navegação
+const login = require("./routes/navegacao/login");
+const home = require("./routes/navegacao/home");
+const usuario = require("./routes/navegacao/usuario");
+
+// rotas de API
 const usuarioApi = require("./routes/api/usuario");
 /*
 const setor = require("./routes/setor");
