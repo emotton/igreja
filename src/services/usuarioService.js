@@ -1,7 +1,7 @@
 const { client } = require("./db");
 
 async function selectUsuarios() {
-  const res = await client.query("SELECT * FROM usuario");
+  const res = await client.query("SELECT * FROM usuario order by login");
   return res[0];
 }
 

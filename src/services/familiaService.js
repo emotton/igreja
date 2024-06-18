@@ -18,9 +18,9 @@ async function insertFamilia(familia) {
   await client.query(sql, values);
 }
 
-async function updateFamilia(id, familia) {
+async function updateFamilia(familia) {
   const sql = "UPDATE familia set nome=? WHERE id_familia = ?";
-  const values = [familia.nome, id];
+  const values = [familia.nome, familia.id_familia];
   await client.query(sql, values);
 }
 

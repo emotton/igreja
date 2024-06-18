@@ -16,13 +16,29 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const results = await usuarioService.insertUsuario(req.body);
-  res.sendStatus(201);
+  const usuario = await usuarioService.selectUsuarioByLogin(req.body.login);
+  if (usuario.length == 0) {
+    const results = await usuarioService.insertUsuario(req.body);
+    res.sendStatus(201);
+  } else {
+    res.status(400).send({
+      message: "login já existe",
+    });
+  }
 });
 
 router.patch("/", async (req, res) => {
-  const results = await usuarioService.updateUsuario(req.body);
-  res.sendStatus(200);
+  const id_atual = req.body.id_usuario;
+  const usuario = await usuarioService.selectUsuarioByLogin(req.body.login);
+  console.log(usuario);
+  if (usuario.length == 0 || usuario[0].id_usuario == id_atual) {
+    await usuarioService.updateUsuario(req.body);
+    res.sendStatus(200);
+  } else {
+    res.status(400).send({
+      message: "login já existe",
+    });
+  }
 });
 
 router.delete("/:id", async (req, res) => {
