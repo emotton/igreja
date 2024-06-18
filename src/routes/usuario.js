@@ -14,7 +14,7 @@ router.get("/reset", logged, (req, res) => {
   res.redirect("/" + baseUrl + "/list");
 });
 
-router.get("/:id", logged, async (req, res) => {
+router.get("/view/:id", logged, async (req, res) => {
   let search = req.session.searchIdUsuario;
 
   const usu = await axios.get(prefixUrl + apiUrl + "/" + req.params.id);
@@ -27,7 +27,7 @@ router.get("/:id", logged, async (req, res) => {
   });
 });
 
-router.get("/", logged, async (req, res) => {
+router.get("/list", logged, async (req, res) => {
   let search = req.query.search
     ? req.query.search
     : req.session.searchIdUsuario;
@@ -42,19 +42,45 @@ router.get("/", logged, async (req, res) => {
   });
 });
 
-router.get("/edit/:id", logged, (req, res) => {
+router.get("/edit/:id", logged, async (req, res) => {
   let search = req.session.searchIdUsuario;
 
-  axios.get(prefixUrl + apiUrl + "/" + req.params.id).then((usu) => {
-    axios.get(prefixUrl + apiUrl).then((lista) => {
-      res.render(baseUrl + "/alterar", {
-        usuarios: lista.data,
-        usuario: usu.data,
-        search: search,
-        anchor: "cadastro",
-      });
-    });
+  const usu = await axios.get(prefixUrl + apiUrl + "/" + req.params.id);
+  const lista = await axios.get(prefixUrl + apiUrl);
+  res.render(baseUrl + "/alterar", {
+    usuarios: lista.data,
+    usuario: usu.data,
+    search: search,
+    anchor: "cadastro",
   });
+});
+
+router.get("/delete/:id", logged, async (req, res) => {
+  let search = req.session.searchIdUsuario;
+
+  const usu = await axios.get(prefixUrl + apiUrl + "/" + req.params.id);
+  const lista = await axios.get(prefixUrl + apiUrl);
+  res.render(baseUrl + "/excluir", {
+    usuarios: lista.data,
+    usuario: usu.data,
+    search: search,
+    anchor: "cadastro",
+  });
+});
+
+router.post("/save", logged, async (req, res) => {
+  await axios.post(prefixUrl + apiUrl, req.body);
+  res.redirect("/" + baseUrl + "/list");
+});
+
+router.post("/update", logged, async (req, res) => {
+  await axios.patch(prefixUrl + apiUrl, req.body);
+  res.redirect("/" + baseUrl + "/list");
+});
+
+router.post("/delete", logged, async (req, res) => {
+  await axios.delete(prefixUrl + apiUrl + "/" + req.body.id_usuario);
+  res.redirect("/" + baseUrl + "/list");
 });
 
 module.exports = router;

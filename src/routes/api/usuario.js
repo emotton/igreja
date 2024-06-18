@@ -15,17 +15,17 @@ router.get("/:id", async (req, res) => {
   res.json(results[0]);
 });
 
-router.post("/", logged, async (req, res) => {
+router.post("/", async (req, res) => {
   const results = await usuarioService.insertUsuario(req.body);
   res.sendStatus(201);
 });
 
-router.patch("/:id", logged, async (req, res) => {
-  const results = await usuarioService.updateUsuario(req.params.id, req.body);
+router.patch("/", async (req, res) => {
+  const results = await usuarioService.updateUsuario(req.body);
   res.sendStatus(200);
 });
 
-router.delete("/:id", logged, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   const results = await usuarioService.deleteUsuario(req.params.id);
   res.sendStatus(204);
 });

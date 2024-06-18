@@ -1,7 +1,7 @@
 <div class="dash-item">
   <div class="titulo-lista">
     <div class="search">
-      <span><a href="/dashboard/usuario">Usuários</a></span>
+      <span><a href="/dashboard/usuario/list">Usuários</a></span>
       <form method="GET" action="/dashboard/usuario">
         <input
           type="text"
@@ -20,7 +20,7 @@
           />
         </a>
       </form>
-      <a href="/dashboard/usuario#cadastro"><img
+      <a href="/dashboard/usuario/list#cadastro"><img
           src="/images/add-32.png"
           alt="Novo"
           title="Novo"
@@ -44,7 +44,7 @@
             <td class="col-sm-4">{{nome}}</td>
             <td class="col-sm-4">{{login}}</td>
             <td class="col-sm-1">
-              <a href="/dashboard/usuario/{{id_usuario}}">
+              <a href="/dashboard/usuario/view/{{id_usuario}}">
                 <img
                   src="/images/view-32.png"
                   alt="Consultar"

@@ -25,9 +25,14 @@ async function insertUsuario(usuario) {
   await client.query(sql, values);
 }
 
-async function updateUsuario(id, usuario) {
+async function updateUsuario(usuario) {
   const sql = "UPDATE usuario set nome=?,login=?,senha=? WHERE id_usuario = ?";
-  const values = [usuario.nome, usuario.login, usuario.senha, id];
+  const values = [
+    usuario.nome,
+    usuario.login,
+    usuario.senha,
+    usuario.id_usuario,
+  ];
   await client.query(sql, values);
 }
 
