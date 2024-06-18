@@ -455,6 +455,11 @@ td {
     color: #eee;
 }
 
+.formulario{
+    background-color: #da7420;
+    padding: 5px;;
+}
+
 .dash-item {
     width: calc(50% - 20px);
     padding: 15px;
