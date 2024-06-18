@@ -68,14 +68,26 @@ router.get("/delete/:id", logged, async (req, res) => {
   });
 });
 
-router.post("/save", logged, async (req, res) => {
-  await axios.post(prefixUrl + apiUrl, req.body);
-  res.redirect("/" + baseUrl + "/list");
+router.post("/save", logged, (req, res) => {
+  axios
+    .post(prefixUrl + apiUrl, req.body)
+    .catch((error) => {
+      req.flash("error", error.response.data.message);
+    })
+    .finally(() => {
+      res.redirect("/" + baseUrl + "/list");
+    });
 });
 
-router.post("/update", logged, async (req, res) => {
-  await axios.patch(prefixUrl + apiUrl, req.body);
-  res.redirect("/" + baseUrl + "/list");
+router.post("/update", logged, (req, res) => {
+  axios
+    .patch(prefixUrl + apiUrl, req.body)
+    .catch((error) => {
+      req.flash("error", error.response.data.message);
+    })
+    .finally(() => {
+      res.redirect("/" + baseUrl + "/list");
+    });
 });
 
 router.post("/delete", logged, async (req, res) => {

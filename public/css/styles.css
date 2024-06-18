@@ -110,20 +110,6 @@ h4 {
     padding: 15px;
 }
 
-.pref-filtro {
-    padding: 15px;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.pref-filtro-item {
-    width: 100px;
-}
-
-.pref-filtro-item p {
-    text-align: center;
-}
-
 figcaption {
     font-size: 0.5rem;
     font-weight: bold;

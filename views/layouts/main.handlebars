@@ -19,11 +19,11 @@
 
 <body>
     {{>_navbar}}
+    {{#if error}}
+    <div class="alert alert-danger">{{error}}</div>
+    {{else}}
+    {{/if}}
     <div class="containerx mt-1">
-        {{#if error}}
-        <div class="alert alert-danger">{{error}}</div>
-        {{else}}
-        {{/if}}
         {{{body}}}
     </div>
     <footer class="rodape">

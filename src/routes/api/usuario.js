@@ -30,7 +30,6 @@ router.post("/", async (req, res) => {
 router.patch("/", async (req, res) => {
   const id_atual = req.body.id_usuario;
   const usuario = await usuarioService.selectUsuarioByLogin(req.body.login);
-  console.log(usuario);
   if (usuario.length == 0 || usuario[0].id_usuario == id_atual) {
     await usuarioService.updateUsuario(req.body);
     res.sendStatus(200);
