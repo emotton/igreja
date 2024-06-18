@@ -41,6 +41,7 @@ h4 {
 
 .containerx {
     padding-top: 0rem;
+    display: flex;
 }
 
 .cardx {
@@ -105,40 +106,6 @@ h4 {
     padding: 5px;
 }
 
-.dash-item {
-    width: calc(50% - 10px);
-    padding: 15px;
-}
-
-.dash-versoes {
-    display: none;
-    width: 30%;
-    padding: 15px;
-    position: absolute;
-    margin: 0 auto;
-    padding: 10px;
-    width: 380px;
-    height: 550px;
-    left: calc(50% - 190px);
-    top: calc(50% - 250px);
-    background-color: white;
-    z-index: 9999;
-    border-radius: 2rem;
-    border-color: red;
-    border-style: groove;
-    animation: move-down 1s;
-    animation-fill-mode: backwards;
-}
-
-.table-versoes>tbody,
-.table-historico>tbody {
-    flex: 1 1 auto;
-    display: block;
-    overflow-y: auto;
-    overflow-x: hidden;
-    height: 400px;
-}
-
 .dash-interno {
     padding: 15px;
 }
@@ -161,10 +128,6 @@ figcaption {
     font-size: 0.5rem;
     font-weight: bold;
     text-align: center;
-}
-
-.imgBus {
-    /* filter: brightness(85%); */
 }
 
 img {
@@ -210,13 +173,6 @@ img {
     color: #ea0506;
     font-size: 1.1rem;
     font-weight: bold;
-}
-
-.dash-form {
-    width: calc(50% - 10px);
-    padding: 15px;
-    height: 586px;
-    margin-right: 10px;
 }
 
 .dash-config {
@@ -408,9 +364,7 @@ td {
     transform: translateX(30px);
 }
 
-
 /* Estilo Flat */
-
 .switch--flat+label {
     padding: 2px;
     width: 60px;
@@ -515,7 +469,23 @@ td {
     color: #eee;
 }
 
+.dash-item {
+    width: calc(50% - 20px);
+    padding: 15px;
+}
+
+.dash-form {
+    width: calc(50% - 20px);
+    padding: 30px;
+    height: 554px;
+    margin-right: 10px;
+}
+
 @media(max-width: 1250px) {
+    .containerx {
+        padding-top: 0rem;
+        display: block;
+    }
     .dash-item {
         flex-basis: 100%;
         width: 97%;
@@ -529,12 +499,6 @@ td {
         margin-left: 5px;
         margin-right: 5px;
         margin-bottom: 5px;
-    }
-    .dash-versoes {
-        height: 350px;
-    }
-    .table-versoes>tbody {
-        height: 200px;
     }
 }
 
@@ -553,11 +517,7 @@ td {
         margin-right: 5px;
         margin-bottom: 5px;
     }
-    .dash-config>div>span {
-        font-size: 0.5rem;
-        color: #fff;
-        text-align: center;
-    }
+
     table,
     thead,
     tbody,
