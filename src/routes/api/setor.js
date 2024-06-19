@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const setorService = require("./setorService");
+const setorService = require("../../services/setorService");
 
 router.get("/", async (req, res) => {
   const results = await setorService.selectSetores();
@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   const results = await setorService.selectSetorById(req.params.id);
-  res.json(results);
+  res.json(results[0]);
 });
 
 router.post("/", async (req, res) => {
@@ -18,8 +18,8 @@ router.post("/", async (req, res) => {
   res.sendStatus(201);
 });
 
-router.patch("/:id", async (req, res) => {
-  const results = await setorService.updateSetor(req.params.id, req.body);
+router.patch("/", async (req, res) => {
+  const results = await setorService.updateSetor(req.body);
   res.sendStatus(200);
 });
 

@@ -1,7 +1,7 @@
-const { client } = require("../../services/db");
+const { client } = require("./db");
 
 async function selectSetores() {
-  const res = await client.query("SELECT * FROM setor");
+  const res = await client.query("SELECT * FROM setor order by nome");
   return res[0];
 }
 
@@ -16,9 +16,9 @@ async function insertSetor(setor) {
   await client.query(sql, values);
 }
 
-async function updateSetor(id, setor) {
+async function updateSetor(setor) {
   const sql = "UPDATE setor set nome=? WHERE id_setor = ?";
-  const values = [setor.nome, id];
+  const values = [setor.nome, setor.id_setor];
   await client.query(sql, values);
 }
 

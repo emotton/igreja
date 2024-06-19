@@ -13,12 +13,12 @@ const flash = require("connect-flash");
 const login = require("./routes/navegacao/login");
 const home = require("./routes/navegacao/home");
 const usuario = require("./routes/navegacao/usuario");
+const setor = require("./routes/navegacao/setor");
 
 // rotas de API
 const usuarioApi = require("./routes/api/usuario");
-/*
-const setor = require("./routes/setor");
 const setorApi = require("./routes/api/setor");
+/*
 const familia = require("./routes/familia");
 const familiaApi = require("./routes/api/familia");
 */
@@ -96,15 +96,15 @@ app.get("/dashboard", (req, res) => {
 app.use("/dashboard/login", login);
 app.use("/dashboard/home", home);
 app.use("/dashboard/usuario", usuario);
-/*
 app.use("/dashboard/setor", setor);
+/*
 app.use("/dashboard/familia", familia);
 */
 
 // API
 app.use("/dashboard/api/usuario", usuarioApi);
-/*
 app.use("/dashboard/api/setor", setorApi);
+/*
 app.use("/dashboard/api/familia", familiaApi);
 */
 

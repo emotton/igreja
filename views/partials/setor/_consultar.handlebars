@@ -1,0 +1,32 @@
+<div id="frmSetorConsultar" class="dash-form">
+  <div class="row form-group">
+    <div class="col-sm-12 mx-auto bg-white rounded shadow table-striped">
+      <div class="titulo-form">
+        <img src="/images/view-64.png" />
+        <h3>Consultar</h3>
+      </div>
+      <fieldset class="form-group">
+        <form action="/dashboard/setor" method="post" class="formulario">
+          <label for="id_setor"># ID:</label>
+          <input
+            type="text"
+            name="id_setor"
+            class="form-control"
+            value="{{setor.id_setor}}"
+            readonly
+          />
+          <label for="nome">Nome:</label>
+          <input
+            type="text"
+            name="nome"
+            class="form-control"
+            value="{{setor.nome}}"
+            readonly
+          />
+          <br />
+          <br />
+        </form>
+      </fieldset>
+    </div>
+  </div>
+</div>

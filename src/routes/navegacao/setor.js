@@ -4,65 +4,63 @@ const router = express.Router();
 const axios = require("axios");
 
 const prefixUrl = "http://localhost:3000/";
-const apiUrl = "dashboard/api/usuario";
-const baseUrl = "dashboard/usuario";
+const apiUrl = "dashboard/api/setor";
+const baseUrl = "dashboard/setor";
 
 const { logged } = require("../../helpers/logged");
 
 router.get("/reset", logged, (req, res) => {
-  req.session.searchIdUsuario = undefined;
+  req.session.searchIdSetor = undefined;
   res.redirect("/" + baseUrl + "/list");
 });
 
 router.get("/view/:id", logged, async (req, res) => {
-  let search = req.session.searchIdUsuario;
+  let search = req.session.searchIdSetor;
 
-  const usuario = await axios.get(prefixUrl + apiUrl + "/" + req.params.id);
+  const setor = await axios.get(prefixUrl + apiUrl + "/" + req.params.id);
   const lista = await axios.get(prefixUrl + apiUrl);
   res.render(baseUrl + "/consultar", {
-    usuarios: lista.data,
-    usuario: usuario.data,
+    setores: lista.data,
+    setor: setor.data,
     search: search,
     anchor: "cadastro",
   });
 });
 
 router.get("/list", logged, async (req, res) => {
-  let search = req.query.search
-    ? req.query.search
-    : req.session.searchIdUsuario;
+  let search = req.query.search ? req.query.search : req.session.searchIdSetor;
 
-  req.session.searchIdUsuario = search;
+  req.session.searchIdSetor = search;
 
-  const usuario = await axios.get(prefixUrl + apiUrl);
+  const setor = await axios.get(prefixUrl + apiUrl);
   res.render(baseUrl + "/index", {
-    usuarios: usuario.data,
+    setores: setor.data,
     search: search,
     anchor: "cadastro",
   });
 });
 
 router.get("/edit/:id", logged, async (req, res) => {
-  let search = req.session.searchIdUsuario;
+  let search = req.session.searchIdSetor;
 
-  const usuario = await axios.get(prefixUrl + apiUrl + "/" + req.params.id);
+  const setor = await axios.get(prefixUrl + apiUrl + "/" + req.params.id);
   const lista = await axios.get(prefixUrl + apiUrl);
   res.render(baseUrl + "/alterar", {
-    usuarios: lista.data,
-    usuario: usuario.data,
+    setores: lista.data,
+    setor: setor.data,
     search: search,
     anchor: "cadastro",
   });
 });
 
 router.get("/delete/:id", logged, async (req, res) => {
-  let search = req.session.searchIdUsuario;
+  let search = req.session.searchIdSetor;
 
-  const usuario = await axios.get(prefixUrl + apiUrl + "/" + req.params.id);
+  const setor = await axios.get(prefixUrl + apiUrl + "/" + req.params.id);
   const lista = await axios.get(prefixUrl + apiUrl);
   res.render(baseUrl + "/excluir", {
-    usuarios: lista.data,
-    usuario: usuario.data,
+    setores: lista.data,
+    setor: setor.data,
     search: search,
     anchor: "cadastro",
   });
@@ -91,7 +89,7 @@ router.post("/update", logged, (req, res) => {
 });
 
 router.post("/delete", logged, async (req, res) => {
-  await axios.delete(prefixUrl + apiUrl + "/" + req.body.id_usuario);
+  await axios.delete(prefixUrl + apiUrl + "/" + req.body.id_setor);
   res.redirect("/" + baseUrl + "/list");
 });
 
