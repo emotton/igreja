@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   const results = await familiaService.selectFamiliaById(req.params.id);
-  res.json(results);
+  res.json(results[0]);
 });
 
 router.post("/", async (req, res) => {
@@ -18,8 +18,8 @@ router.post("/", async (req, res) => {
   res.sendStatus(201);
 });
 
-router.patch("/:id", async (req, res) => {
-  const results = await familiaService.updateFamilia(req.params.id, req.body);
+router.patch("/", async (req, res) => {
+  const results = await familiaService.updateFamilia(req.body);
   res.sendStatus(200);
 });
 

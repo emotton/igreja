@@ -14,14 +14,12 @@ const login = require("./routes/navegacao/login");
 const home = require("./routes/navegacao/home");
 const usuario = require("./routes/navegacao/usuario");
 const setor = require("./routes/navegacao/setor");
+const familia = require("./routes/navegacao/familia");
 
 // rotas de API
 const usuarioApi = require("./routes/api/usuario");
 const setorApi = require("./routes/api/setor");
-/*
-const familia = require("./routes/familia");
 const familiaApi = require("./routes/api/familia");
-*/
 
 const app = express();
 
@@ -97,16 +95,12 @@ app.use("/dashboard/login", login);
 app.use("/dashboard/home", home);
 app.use("/dashboard/usuario", usuario);
 app.use("/dashboard/setor", setor);
-/*
 app.use("/dashboard/familia", familia);
-*/
 
 // API
 app.use("/dashboard/api/usuario", usuarioApi);
 app.use("/dashboard/api/setor", setorApi);
-/*
 app.use("/dashboard/api/familia", familiaApi);
-*/
 
 const PORT = process.env.PORT;
 

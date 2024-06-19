@@ -1,7 +1,7 @@
 const { client } = require("./db");
 
 async function selectFamilias() {
-  const res = await client.query("SELECT * FROM familia");
+  const res = await client.query("SELECT * FROM familia order by nome");
   return res[0];
 }
 

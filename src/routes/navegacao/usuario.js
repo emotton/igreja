@@ -34,9 +34,9 @@ router.get("/list", logged, async (req, res) => {
 
   req.session.searchIdUsuario = search;
 
-  const usuario = await axios.get(prefixUrl + apiUrl);
+  const lista = await axios.get(prefixUrl + apiUrl);
   res.render(baseUrl + "/index", {
-    usuarios: usuario.data,
+    usuarios: lista.data,
     search: search,
     anchor: "cadastro",
   });
