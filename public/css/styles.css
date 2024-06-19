@@ -560,7 +560,7 @@ td {
         padding-left: 10px;
         margin-left: 50px;
     }
-    /* Usuários */
+    /* Setores */
     .table-setor>tbody>tr>td:nth-of-type(1):before {
         content: "ID:";
     }
@@ -570,6 +570,21 @@ td {
     .table-setor>tbody>tr>td:nth-child(3),
     .table-setor>tbody>tr>td:nth-child(4),
     .table-setor>tbody>tr>td:nth-child(5) {
+        float: left;
+        width: 50px;
+        padding-left: 10px;
+        margin-left: 50px;
+    }
+    /* Familias */
+    .table-familia>tbody>tr>td:nth-of-type(1):before {
+        content: "ID:";
+    }
+    .table-familia>tbody>tr>td:nth-of-type(2):before {
+        content: "Nome:";
+    }
+    .table-familia>tbody>tr>td:nth-child(3),
+    .table-familia>tbody>tr>td:nth-child(4),
+    .table-familia>tbody>tr>td:nth-child(5) {
         float: left;
         width: 50px;
         padding-left: 10px;
