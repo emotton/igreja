@@ -1,7 +1,12 @@
 const { client } = require("./db");
 
 async function selectFamilias() {
-  const res = await client.query(`SELECT * FROM familia order by nome`);
+  const res = await client.query(
+    `SELECT f.id_familia, f.nome, count(p.id_pessoa) qtde FROM familia f ` +
+      `left join pessoa p on p.id_familia = f.id_familia ` +
+      `group by f.id_familia, f.nome ` +
+      `order by f.nome`
+  );
   return res[0];
 }
 

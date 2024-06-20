@@ -32,15 +32,17 @@
       <thead class="thead-dark">
         <tr class="row">
           <th class="col-sm-1">#</th>
-          <th class="col-sm-8">Nome</th>
-          <th class="col-sm-3" colspan="3">Ações</th>
+          <th class="col-sm-5">Nome</th>
+          <th class="col-sm-2">Pessoas</th>
+          <th class="col-sm-4" colspan="4">Ações</th>
         </tr>
       </thead>
       <tbody>
         {{#each familias}}
           <tr class="row">
             <td class="col-sm-1">{{id_familia}}</td>
-            <td class="col-sm-7">{{nome}}</td>
+            <td class="col-sm-5">{{nome}}</td>
+            <td class="col-sm-2">{{qtde}}</td>
             <td class="col-sm-1">
               <a href="/dashboard/pessoa/familia/{{id_familia}}">
                 <img
