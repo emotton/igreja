@@ -40,7 +40,16 @@
         {{#each familias}}
           <tr class="row">
             <td class="col-sm-1">{{id_familia}}</td>
-            <td class="col-sm-8">{{nome}}</td>
+            <td class="col-sm-7">{{nome}}</td>
+            <td class="col-sm-1">
+              <a href="/dashboard/familia/pessoa/{{id_familia}}">
+                <img
+                  src="/images/pessoas-32x32.jpg"
+                  alt="Membros da Fámilia"
+                  title="Membros da Fámilia"
+                />
+              </a>
+            </td>
             <td class="col-sm-1">
               <a href="/dashboard/familia/view/{{id_familia}}">
                 <img
