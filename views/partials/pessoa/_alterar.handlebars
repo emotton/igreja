@@ -1,0 +1,49 @@
+<div id="frmPessoaAlterar" class="dash-form">
+  <div class="row form-group">
+    <div class="col-sm-12 mx-auto bg-white rounded shadow table-striped">
+      <div class="titulo-form">
+        <img src="/images/edit-64.png" />
+        <h3>Alterar</h3>
+      </div>
+      <fieldset class="form-group">
+        <form
+          action="/dashboard/pessoa/update"
+          method="post"
+          class="formulario"
+        >
+          <input
+            type="hidden"
+            id="id_familia"
+            name="id_familia"
+            class="form-control"
+            value="{{familia.id_familia}}"
+            readonly
+          />
+          <label for="id_pessoa"># ID:</label>
+          <input
+            type="text"
+            id="id_pessoa"
+            name="id_pessoa"
+            class="form-control"
+            value="{{pessoa.id_pessoa}}"
+            readonly
+          />
+          <label for="nome">Nome:</label>
+          <input
+            type="text"
+            id="nome"
+            name="nome"
+            class="form-control"
+            value="{{pessoa.nome}}"
+            maxlength="30"
+          />
+          <br />
+          <div class="text-center">
+            <button class="btn btn-primary" type="reset">Cancelar</button>
+            <button class="btn btn-primary" type="submit">Alterar</button>
+          </div>
+        </form>
+      </fieldset>
+    </div>
+  </div>
+</div>

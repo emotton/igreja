@@ -584,11 +584,12 @@ td {
     }
     .table-familia>tbody>tr>td:nth-child(3),
     .table-familia>tbody>tr>td:nth-child(4),
-    .table-familia>tbody>tr>td:nth-child(5) {
+    .table-familia>tbody>tr>td:nth-child(5),
+    .table-familia>tbody>tr>td:nth-child(6) {
         float: left;
-        width: 50px;
-        padding-left: 10px;
-        margin-left: 50px;
+        width: 40px;
+        padding-left: 5px;
+        margin-left: 30px;
     }
 }
 

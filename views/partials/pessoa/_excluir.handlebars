@@ -1,0 +1,46 @@
+<div id="frmPessoaExcluir" class="dash-form">
+  <div class="row form-group">
+    <div class="col-sm-12 mx-auto bg-white rounded shadow table-striped">
+      <div class="titulo-form">
+        <img src="/images/delete-64.png" />
+        <h3>Excluir</h3>
+      </div>
+      <fieldset class="form-group">
+        <form
+          action="/dashboard/pessoa/delete"
+          method="post"
+          class="formulario"
+        >
+          <input
+            type="hidden"
+            id="id_familia"
+            name="id_familia"
+            class="form-control"
+            value="{{familia.id_familia}}"
+            readonly
+          />
+          <label for="id_pessoa"># ID:</label>
+          <input
+            type="text"
+            name="id_pessoa"
+            class="form-control"
+            value="{{pessoa.id_pessoa}}"
+            readonly
+          />
+          <label for="nome">Nome:</label>
+          <input
+            type="text"
+            name="nome"
+            class="form-control"
+            value="{{pessoa.nome}}"
+            readonly
+          />
+          <br />
+          <div class="text-center">
+            <button class="btn btn-primary" type="submit">Excluir</button>
+          </div>
+        </form>
+      </fieldset>
+    </div>
+  </div>
+</div>

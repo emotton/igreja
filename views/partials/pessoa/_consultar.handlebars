@@ -1,0 +1,32 @@
+<div id="frmPessoaConsultar" class="dash-form">
+  <div class="row form-group">
+    <div class="col-sm-12 mx-auto bg-white rounded shadow table-striped">
+      <div class="titulo-form">
+        <img src="/images/view-64.png" />
+        <h3>Consultar</h3>
+      </div>
+      <fieldset class="form-group">
+        <form action="/dashboard/pessoa" method="post" class="formulario">
+          <label for="id_pessoa"># ID:</label>
+          <input
+            type="text"
+            name="id_pessoa"
+            class="form-control"
+            value="{{pessoa.id_pessoa}}"
+            readonly
+          />
+          <label for="nome">Nome:</label>
+          <input
+            type="text"
+            name="nome"
+            class="form-control"
+            value="{{pessoa.nome}}"
+            readonly
+          />
+          <br />
+          <br />
+        </form>
+      </fieldset>
+    </div>
+  </div>
+</div>

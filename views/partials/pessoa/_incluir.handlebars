@@ -1,0 +1,37 @@
+<div id="frmPessoaIncluir" class="dash-form">
+  <div class="row form-group">
+    <div class="col-sm-12 mx-auto bg-white rounded shadow table-striped">
+      <div class="titulo-form">
+        <img src="/images/add-64.png" />
+        <h3>Incluir</h3>
+      </div>
+      <fieldset class="form-group">
+        <form action="/dashboard/pessoa/save" method="post" class="formulario">
+          <input
+            type="hidden"
+            id="id_familia"
+            name="id_familia"
+            class="form-control"
+            value="{{idFamilia}}"
+            readonly
+          />
+          <label for="nome">Nome:</label>
+          <input
+            type="text"
+            id="nome"
+            name="nome"
+            class="form-control"
+            maxlength="30"
+            placeholder="Nome"
+          />
+          <br />
+          <br />
+          <div class="text-center">
+            <button class="btn btn-primary" type="reset">Cancelar</button>
+            <button class="btn btn-primary" type="submit">Incluir</button>
+          </div>
+        </form>
+      </fieldset>
+    </div>
+  </div>
+</div>
