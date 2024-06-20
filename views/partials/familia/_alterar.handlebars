@@ -20,6 +20,13 @@
             value="{{familia.id_familia}}"
             readonly
           />
+          <label for="id_setor">Setor:</label>
+          <select name="id_setor" class="form-control">
+            <option value="0">Selecione o setor</option>
+            {{#each setores}}
+              <option value="{{id_setor}}" {{#if CHECKED}}selected{{/if}}>{{nome}}</option>
+            {{/each}}
+          </select>
           <label for="nome">Nome:</label>
           <input
             type="text"
@@ -28,6 +35,24 @@
             class="form-control"
             value="{{familia.nome}}"
             maxlength="30"
+          />
+          <label for="endereco">Endereço:</label>
+          <input
+            type="text"
+            id="endereco"
+            name="endereco"
+            class="form-control"
+            value="{{familia.endereco}}"
+            maxlength="30"
+          />
+          <label for="numero">Número:</label>
+          <input
+            type="text"
+            id="numero"
+            name="numero"
+            class="form-control"
+            value="{{familia.numero}}"
+            maxlength="10"
           />
           <br />
           <div class="text-center">

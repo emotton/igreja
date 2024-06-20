@@ -4,7 +4,8 @@ const router = express.Router();
 const axios = require("axios");
 
 const prefixUrl = "http://localhost:3000/";
-const apiUrl = "dashboard/api/familia";
+const apiFamiliaUrl = "dashboard/api/familia";
+const apiSetorUrl = "dashboard/api/setor";
 const baseUrl = "dashboard/familia";
 
 const { logged } = require("../../helpers/logged");
@@ -17,11 +18,20 @@ router.get("/reset", logged, (req, res) => {
 router.get("/view/:id", logged, async (req, res) => {
   let search = req.session.searchIdFamilia;
 
-  const familia = await axios.get(prefixUrl + apiUrl + "/" + req.params.id);
-  const lista = await axios.get(prefixUrl + apiUrl);
+  const familia = await axios.get(
+    prefixUrl + apiFamiliaUrl + "/" + req.params.id
+  );
+  const lista = await axios.get(prefixUrl + apiFamiliaUrl);
+  const setores = await axios.get(prefixUrl + apiSetorUrl);
+  setores.data.forEach((setor) => {
+    if (setor.id_setor == familia.data.id_setor) {
+      setor.CHECKED = true;
+    }
+  });
   res.render(baseUrl + "/consultar", {
     familias: lista.data,
     familia: familia.data,
+    setores: setores.data,
     search: search,
     anchor: "cadastro",
   });
@@ -34,9 +44,11 @@ router.get("/list", logged, async (req, res) => {
 
   req.session.searchIdFamilia = search;
 
-  const lista = await axios.get(prefixUrl + apiUrl);
+  const lista = await axios.get(prefixUrl + apiFamiliaUrl);
+  const setores = await axios.get(prefixUrl + apiSetorUrl);
   res.render(baseUrl + "/index", {
     familias: lista.data,
+    setores: setores.data,
     search: search,
     anchor: "cadastro",
   });
@@ -45,11 +57,20 @@ router.get("/list", logged, async (req, res) => {
 router.get("/edit/:id", logged, async (req, res) => {
   let search = req.session.searchIdFamilia;
 
-  const familia = await axios.get(prefixUrl + apiUrl + "/" + req.params.id);
-  const lista = await axios.get(prefixUrl + apiUrl);
+  const familia = await axios.get(
+    prefixUrl + apiFamiliaUrl + "/" + req.params.id
+  );
+  const lista = await axios.get(prefixUrl + apiFamiliaUrl);
+  const setores = await axios.get(prefixUrl + apiSetorUrl);
+  setores.data.forEach((setor) => {
+    if (setor.id_setor == familia.data.id_setor) {
+      setor.CHECKED = true;
+    }
+  });
   res.render(baseUrl + "/alterar", {
     familias: lista.data,
     familia: familia.data,
+    setores: setores.data,
     search: search,
     anchor: "cadastro",
   });
@@ -58,11 +79,20 @@ router.get("/edit/:id", logged, async (req, res) => {
 router.get("/delete/:id", logged, async (req, res) => {
   let search = req.session.searchIdFamilia;
 
-  const familia = await axios.get(prefixUrl + apiUrl + "/" + req.params.id);
-  const lista = await axios.get(prefixUrl + apiUrl);
+  const familia = await axios.get(
+    prefixUrl + apiFamiliaUrl + "/" + req.params.id
+  );
+  const lista = await axios.get(prefixUrl + apiFamiliaUrl);
+  const setores = await axios.get(prefixUrl + apiSetorUrl);
+  setores.data.forEach((setor) => {
+    if (setor.id_setor == familia.data.id_setor) {
+      setor.CHECKED = true;
+    }
+  });
   res.render(baseUrl + "/excluir", {
     familias: lista.data,
     familia: familia.data,
+    setores: setores.data,
     search: search,
     anchor: "cadastro",
   });
@@ -70,7 +100,7 @@ router.get("/delete/:id", logged, async (req, res) => {
 
 router.post("/save", logged, (req, res) => {
   axios
-    .post(prefixUrl + apiUrl, req.body)
+    .post(prefixUrl + apiFamiliaUrl, req.body)
     .catch((error) => {
       req.flash("error", error.response.data.message);
     })
@@ -81,7 +111,7 @@ router.post("/save", logged, (req, res) => {
 
 router.post("/update", logged, (req, res) => {
   axios
-    .patch(prefixUrl + apiUrl, req.body)
+    .patch(prefixUrl + apiFamiliaUrl, req.body)
     .catch((error) => {
       req.flash("error", error.response.data.message);
     })
@@ -91,7 +121,7 @@ router.post("/update", logged, (req, res) => {
 });
 
 router.post("/delete", logged, async (req, res) => {
-  await axios.delete(prefixUrl + apiUrl + "/" + req.body.id_familia);
+  await axios.delete(prefixUrl + apiFamiliaUrl + "/" + req.body.id_familia);
   res.redirect("/" + baseUrl + "/list");
 });
 

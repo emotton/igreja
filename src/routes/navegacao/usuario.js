@@ -4,7 +4,7 @@ const router = express.Router();
 const axios = require("axios");
 
 const prefixUrl = "http://localhost:3000/";
-const apiUrl = "dashboard/api/usuario";
+const apiUsuarioUrl = "dashboard/api/usuario";
 const baseUrl = "dashboard/usuario";
 
 const { logged } = require("../../helpers/logged");
@@ -17,8 +17,10 @@ router.get("/reset", logged, (req, res) => {
 router.get("/view/:id", logged, async (req, res) => {
   let search = req.session.searchIdUsuario;
 
-  const usuario = await axios.get(prefixUrl + apiUrl + "/" + req.params.id);
-  const lista = await axios.get(prefixUrl + apiUrl);
+  const usuario = await axios.get(
+    prefixUrl + apiUsuarioUrl + "/" + req.params.id
+  );
+  const lista = await axios.get(prefixUrl + apiUsuarioUrl);
   res.render(baseUrl + "/consultar", {
     usuarios: lista.data,
     usuario: usuario.data,
@@ -34,7 +36,7 @@ router.get("/list", logged, async (req, res) => {
 
   req.session.searchIdUsuario = search;
 
-  const lista = await axios.get(prefixUrl + apiUrl);
+  const lista = await axios.get(prefixUrl + apiUsuarioUrl);
   res.render(baseUrl + "/index", {
     usuarios: lista.data,
     search: search,
@@ -45,8 +47,10 @@ router.get("/list", logged, async (req, res) => {
 router.get("/edit/:id", logged, async (req, res) => {
   let search = req.session.searchIdUsuario;
 
-  const usuario = await axios.get(prefixUrl + apiUrl + "/" + req.params.id);
-  const lista = await axios.get(prefixUrl + apiUrl);
+  const usuario = await axios.get(
+    prefixUrl + apiUsuarioUrl + "/" + req.params.id
+  );
+  const lista = await axios.get(prefixUrl + apiUsuarioUrl);
   res.render(baseUrl + "/alterar", {
     usuarios: lista.data,
     usuario: usuario.data,
@@ -58,8 +62,10 @@ router.get("/edit/:id", logged, async (req, res) => {
 router.get("/delete/:id", logged, async (req, res) => {
   let search = req.session.searchIdUsuario;
 
-  const usuario = await axios.get(prefixUrl + apiUrl + "/" + req.params.id);
-  const lista = await axios.get(prefixUrl + apiUrl);
+  const usuario = await axios.get(
+    prefixUrl + apiUsuarioUrl + "/" + req.params.id
+  );
+  const lista = await axios.get(prefixUrl + apiUsuarioUrl);
   res.render(baseUrl + "/excluir", {
     usuarios: lista.data,
     usuario: usuario.data,
@@ -70,7 +76,7 @@ router.get("/delete/:id", logged, async (req, res) => {
 
 router.post("/save", logged, (req, res) => {
   axios
-    .post(prefixUrl + apiUrl, req.body)
+    .post(prefixUrl + apiUsuarioUrl, req.body)
     .catch((error) => {
       req.flash("error", error.response.data.message);
     })
@@ -81,7 +87,7 @@ router.post("/save", logged, (req, res) => {
 
 router.post("/update", logged, (req, res) => {
   axios
-    .patch(prefixUrl + apiUrl, req.body)
+    .patch(prefixUrl + apiUsuarioUrl, req.body)
     .catch((error) => {
       req.flash("error", error.response.data.message);
     })
@@ -91,7 +97,7 @@ router.post("/update", logged, (req, res) => {
 });
 
 router.post("/delete", logged, async (req, res) => {
-  await axios.delete(prefixUrl + apiUrl + "/" + req.body.id_usuario);
+  await axios.delete(prefixUrl + apiUsuarioUrl + "/" + req.body.id_usuario);
   res.redirect("/" + baseUrl + "/list");
 });
 

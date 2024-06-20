@@ -4,7 +4,7 @@ const router = express.Router();
 const axios = require("axios");
 
 const prefixUrl = "http://localhost:3000/";
-const apiUrl = "dashboard/api/setor";
+const apiSetorUrl = "dashboard/api/setor";
 const baseUrl = "dashboard/setor";
 
 const { logged } = require("../../helpers/logged");
@@ -17,8 +17,8 @@ router.get("/reset", logged, (req, res) => {
 router.get("/view/:id", logged, async (req, res) => {
   let search = req.session.searchIdSetor;
 
-  const setor = await axios.get(prefixUrl + apiUrl + "/" + req.params.id);
-  const lista = await axios.get(prefixUrl + apiUrl);
+  const setor = await axios.get(prefixUrl + apiSetorUrl + "/" + req.params.id);
+  const lista = await axios.get(prefixUrl + apiSetorUrl);
   res.render(baseUrl + "/consultar", {
     setores: lista.data,
     setor: setor.data,
@@ -32,7 +32,7 @@ router.get("/list", logged, async (req, res) => {
 
   req.session.searchIdSetor = search;
 
-  const lista = await axios.get(prefixUrl + apiUrl);
+  const lista = await axios.get(prefixUrl + apiSetorUrl);
   res.render(baseUrl + "/index", {
     setores: lista.data,
     search: search,
@@ -43,8 +43,8 @@ router.get("/list", logged, async (req, res) => {
 router.get("/edit/:id", logged, async (req, res) => {
   let search = req.session.searchIdSetor;
 
-  const setor = await axios.get(prefixUrl + apiUrl + "/" + req.params.id);
-  const lista = await axios.get(prefixUrl + apiUrl);
+  const setor = await axios.get(prefixUrl + apiSetorUrl + "/" + req.params.id);
+  const lista = await axios.get(prefixUrl + apiSetorUrl);
   res.render(baseUrl + "/alterar", {
     setores: lista.data,
     setor: setor.data,
@@ -56,8 +56,8 @@ router.get("/edit/:id", logged, async (req, res) => {
 router.get("/delete/:id", logged, async (req, res) => {
   let search = req.session.searchIdSetor;
 
-  const setor = await axios.get(prefixUrl + apiUrl + "/" + req.params.id);
-  const lista = await axios.get(prefixUrl + apiUrl);
+  const setor = await axios.get(prefixUrl + apiSetorUrl + "/" + req.params.id);
+  const lista = await axios.get(prefixUrl + apiSetorUrl);
   res.render(baseUrl + "/excluir", {
     setores: lista.data,
     setor: setor.data,
@@ -68,7 +68,7 @@ router.get("/delete/:id", logged, async (req, res) => {
 
 router.post("/save", logged, (req, res) => {
   axios
-    .post(prefixUrl + apiUrl, req.body)
+    .post(prefixUrl + apiSetorUrl, req.body)
     .catch((error) => {
       req.flash("error", error.response.data.message);
     })
@@ -79,7 +79,7 @@ router.post("/save", logged, (req, res) => {
 
 router.post("/update", logged, (req, res) => {
   axios
-    .patch(prefixUrl + apiUrl, req.body)
+    .patch(prefixUrl + apiSetorUrl, req.body)
     .catch((error) => {
       req.flash("error", error.response.data.message);
     })
@@ -89,7 +89,7 @@ router.post("/update", logged, (req, res) => {
 });
 
 router.post("/delete", logged, async (req, res) => {
-  await axios.delete(prefixUrl + apiUrl + "/" + req.body.id_setor);
+  await axios.delete(prefixUrl + apiSetorUrl + "/" + req.body.id_setor);
   res.redirect("/" + baseUrl + "/list");
 });
 

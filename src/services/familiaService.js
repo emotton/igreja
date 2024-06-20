@@ -13,14 +13,27 @@ async function selectFamiliaById(id) {
 }
 
 async function insertFamilia(familia) {
-  const sql = "INSERT INTO familia(nome) VALUES (?);";
-  const values = [familia.nome];
+  const sql =
+    "INSERT INTO familia(nome, endereco, numero, id_setor) VALUES (?,?,?,?);";
+  const values = [
+    familia.nome,
+    familia.endereco,
+    familia.numero,
+    familia.id_setor,
+  ];
   await client.query(sql, values);
 }
 
 async function updateFamilia(familia) {
-  const sql = "UPDATE familia set nome=? WHERE id_familia = ?";
-  const values = [familia.nome, familia.id_familia];
+  const sql =
+    "UPDATE familia set nome=?, endereco=?, numero=?, id_setor=? WHERE id_familia = ?";
+  const values = [
+    familia.nome,
+    familia.endereco,
+    familia.numero,
+    familia.id_setor,
+    familia.id_familia,
+  ];
   await client.query(sql, values);
 }
 

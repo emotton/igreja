@@ -7,6 +7,13 @@
       </div>
       <fieldset class="form-group">
         <form action="/dashboard/familia/save" method="post" class="formulario">
+          <label for="id_setor">Setor:</label>
+          <select name="id_setor" class="form-control">
+            <option value="0">Selecione o setor</option>
+            {{#each setores}}
+              <option value="{{id_setor}}">{{nome}}</option>
+            {{/each}}
+          </select>
           <label for="nome">Nome:</label>
           <input
             type="text"
@@ -15,6 +22,24 @@
             class="form-control"
             maxlength="30"
             placeholder="Nome da família"
+          />
+          <label for="endereco">Endereço:</label>
+          <input
+            type="text"
+            id="endereco"
+            name="endereco"
+            class="form-control"
+            maxlength="30"
+            placeholder="Endereço"
+          />
+          <label for="numero">Número:</label>
+          <input
+            type="text"
+            id="numero"
+            name="numero"
+            class="form-control"
+            maxlength="10"
+            placeholder="Número"
           />
           <br />
           <br />
