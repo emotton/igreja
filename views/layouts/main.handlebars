@@ -20,7 +20,11 @@
 <body>
     {{>_navbar}}
     {{#if error}}
-    <div class="alert alert-danger">{{error}}</div>
+    <div class="alert alert-danger">
+        {{#each error}}
+        <li>{{this}}</li>
+        {{/each}}
+    </div>
     {{else}}
     {{/if}}
     <div class="containerx mt-1">

@@ -20,6 +20,7 @@
     "express": "^4.19.2",
     "express-handlebars": "^3.0.2",
     "express-session": "^1.16.1",
+    "express-validator": "^7.1.0",
     "memorystore": "^1.6.1",
     "mysql2": "^3.10.1",
     "numeral": "^2.0.6",

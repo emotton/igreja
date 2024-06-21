@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { body, validationResult } = require("express-validator");
 
 const usuarioService = require("../../services/usuarioService");
 
@@ -15,17 +16,33 @@ router.get("/:id", async (req, res) => {
   res.json(results[0]);
 });
 
-router.post("/", async (req, res) => {
-  const usuario = await usuarioService.selectUsuarioByLogin(req.body.login);
-  if (usuario.length == 0) {
-    const results = await usuarioService.insertUsuario(req.body);
-    res.sendStatus(201);
-  } else {
-    res.status(400).send({
-      message: "login já existe",
-    });
+router.post(
+  "/",
+  body("login")
+    .isLength({ min: 3, max: 30 })
+    .withMessage("Login entre 3 e 30 caracteres"),
+  body("nome")
+    .isLength({ min: 3, max: 30 })
+    .withMessage("Nome entre 3 e 30 caracteres"),
+  body("senha")
+    .isLength({ min: 4, max: 30 })
+    .withMessage("Senha entre 4 e 30 caracteres"),
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    const usuario = await usuarioService.selectUsuarioByLogin(req.body.login);
+    if (usuario.length == 0) {
+      const results = await usuarioService.insertUsuario(req.body);
+      res.sendStatus(201);
+    } else {
+      res.status(400).send({
+        message: "login já existe",
+      });
+    }
   }
-});
+);
 
 router.patch("/", async (req, res) => {
   const id_atual = req.body.id_usuario;

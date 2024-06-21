@@ -78,7 +78,16 @@ router.post("/save", logged, (req, res) => {
   axios
     .post(prefixUrl + apiUsuarioUrl, req.body)
     .catch((error) => {
-      req.flash("error", error.response.data.message);
+      let msg = [];
+      if (error.response.data.errors != undefined) {
+        error.response.data.errors.forEach((erro) => {
+          msg.push(erro.msg);
+        });
+      }
+      if (error.response.data.message) {
+        msg = [error.response.data.message];
+      }
+      req.flash("error", msg);
     })
     .finally(() => {
       res.redirect("/" + baseUrl + "/list");

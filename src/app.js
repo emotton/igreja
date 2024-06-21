@@ -68,6 +68,7 @@ app.use(bodyParser.json());
 var hbs = handlebars.create({
   helpers: {
     xif: require("./helpers/hbs_xif"),
+    breaklines: require("./helpers/breaklines"),
   },
   defaultLayout: "main",
   partialsDir: ["views/partials/"],
