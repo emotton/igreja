@@ -55,6 +55,9 @@ router.patch(
   body("senha")
     .isLength({ min: 4, max: 30 })
     .withMessage("Senha entre 4 e 30 caracteres"),
+  body("id_usuario")
+    .isInt({ min: 1 })
+    .withMessage("Id usuario deve ser informado e numérico"),
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

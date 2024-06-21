@@ -34,6 +34,9 @@ router.patch(
   body("nome")
     .isLength({ min: 5, max: 30 })
     .withMessage("Nome entre 5 e 30 caracteres"),
+  body("id_setor")
+    .isInt({ min: 1 })
+    .withMessage("Id setor deve ser informado e numérico"),
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
