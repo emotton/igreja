@@ -102,7 +102,16 @@ router.post("/save", logged, (req, res) => {
   axios
     .post(prefixUrl + apiPessoaUrl, req.body)
     .catch((error) => {
-      req.flash("error", error.response.data.message);
+      let msg = [];
+      if (error.response.data.errors != undefined) {
+        error.response.data.errors.forEach((erro) => {
+          msg.push(erro.msg);
+        });
+      }
+      if (error.response.data.message) {
+        msg = [error.response.data.message];
+      }
+      req.flash("error", msg);
     })
     .finally(() => {
       res.redirect("/" + baseUrl + "/familia/" + req.body.id_familia);
@@ -113,7 +122,16 @@ router.post("/update", logged, (req, res) => {
   axios
     .patch(prefixUrl + apiPessoaUrl, req.body)
     .catch((error) => {
-      req.flash("error", error.response.data.message);
+      let msg = [];
+      if (error.response.data.errors != undefined) {
+        error.response.data.errors.forEach((erro) => {
+          msg.push(erro.msg);
+        });
+      }
+      if (error.response.data.message) {
+        msg = [error.response.data.message];
+      }
+      req.flash("error", msg);
     })
     .finally(() => {
       res.redirect("/" + baseUrl + "/familia/" + req.body.id_familia);
