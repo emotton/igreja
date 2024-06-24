@@ -521,6 +521,7 @@ td {
     table,
     thead,
     tbody,
+    tfoot,
     th,
     td,
     tr {
@@ -598,6 +599,16 @@ td {
     .table-familia>tbody>tr>td:nth-child(5),
     .table-familia>tbody>tr>td:nth-child(6),
     .table-familia>tbody>tr>td:nth-child(7) {
+        float: left;
+        width: 40px;
+        padding-left: 5px;
+        margin-left: 30px;
+    }
+    /* Dizimo */
+    .table-dizimo>tbody>tr>td:nth-of-type(1):before {
+        content: "Família:";
+    }
+    .table-dizimo>tbody>tr>td:nth-child(2) {
         float: left;
         width: 40px;
         padding-left: 5px;
