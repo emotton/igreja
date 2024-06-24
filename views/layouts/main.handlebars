@@ -19,6 +19,14 @@
 
 <body>
     {{>_navbar}}
+    {{#if success_msg}}
+    <div class="alert alert-success">
+        {{#each success_msg}}
+        <li>{{this}}</li>
+        {{/each}}
+    </div>
+    {{else}}
+    {{/if}}
     {{#if error}}
     <div class="alert alert-danger">
         {{#each error}}

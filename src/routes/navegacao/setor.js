@@ -69,6 +69,9 @@ router.get("/delete/:id", logged, async (req, res) => {
 router.post("/save", logged, (req, res) => {
   axios
     .post(prefixUrl + apiSetorUrl, req.body)
+    .then(() => {
+      req.flash("success_msg", "Inclusão com sucesso !");
+    })
     .catch((error) => {
       let msg = [];
       if (error.response.data.errors != undefined) {
@@ -89,6 +92,9 @@ router.post("/save", logged, (req, res) => {
 router.post("/update", logged, (req, res) => {
   axios
     .patch(prefixUrl + apiSetorUrl, req.body)
+    .then(() => {
+      req.flash("success_msg", "Alteração com sucesso !");
+    })
     .catch((error) => {
       let msg = [];
       if (error.response.data.errors != undefined) {
@@ -107,8 +113,26 @@ router.post("/update", logged, (req, res) => {
 });
 
 router.post("/delete", logged, async (req, res) => {
-  await axios.delete(prefixUrl + apiSetorUrl + "/" + req.body.id_setor);
-  res.redirect("/" + baseUrl + "/list");
+  await axios
+    .delete(prefixUrl + apiSetorUrl + "/" + req.body.id_setor)
+    .then(() => {
+      req.flash("success_msg", "Exclusão com sucesso !");
+    })
+    .catch((error) => {
+      let msg = [];
+      if (error.response.data.errors != undefined) {
+        error.response.data.errors.forEach((erro) => {
+          msg.push(erro.msg);
+        });
+      }
+      if (error.response.data.message) {
+        msg = [error.response.data.message];
+      }
+      req.flash("error", msg);
+    })
+    .finally(() => {
+      res.redirect("/" + baseUrl + "/list");
+    });
 });
 
 module.exports = router;

@@ -48,6 +48,7 @@ router.post("/save", logged, async (req, res) => {
       req.flash("error", msg);
     })
     .finally(() => {
+      req.flash("success_msg", "Gravação com sucesso !");
       res.redirect("/" + baseUrl + "/list");
     });
 });
