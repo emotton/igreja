@@ -16,6 +16,7 @@ const usuario = require("./routes/navegacao/usuario");
 const setor = require("./routes/navegacao/setor");
 const familia = require("./routes/navegacao/familia");
 const pessoa = require("./routes/navegacao/pessoa");
+const dizimo = require("./routes/navegacao/dizimo");
 
 // rotas de API
 const usuarioApi = require("./routes/api/usuario");
@@ -100,6 +101,7 @@ app.use("/dashboard/usuario", usuario);
 app.use("/dashboard/setor", setor);
 app.use("/dashboard/familia", familia);
 app.use("/dashboard/pessoa", pessoa);
+app.use("/dashboard/dizimo", dizimo);
 
 // API
 app.use("/dashboard/api/usuario", usuarioApi);

@@ -1,0 +1,30 @@
+<div class="dash-item">
+  <div class="titulo-lista">
+    <br />
+    Dizimo
+  </div>
+  <div class="mx-auto bg-white rounded shadow">
+    <fieldset class="form-group">
+      <form action="/dashboard/dizimo/save" method="post" class="formulario">
+        {{#each familias}}
+          {{nome}}
+          <div class="switch__container">
+            <input
+              id="dizimista-{{id_familia}}"
+              name="dizimista-{{id_familia}}"
+              class="switch switch--shadow"
+              type="checkbox"
+              value="{{id_familia}}"
+              nochecked
+            />
+            <label for="dizimista-{{id_familia}}"></label>
+          </div>
+        {{/each}}
+        <br />
+        <div class="text-center">
+          <button class="btn btn-primary" type="submit">Gravar</button>
+        </div>
+      </form>
+    </fieldset>
+  </div>
+</div>
