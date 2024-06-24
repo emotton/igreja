@@ -16,7 +16,7 @@
               class="switch switch--shadow"
               type="checkbox"
               value="{{id_familia}}"
-              nochecked
+              {{#xif status '==' 'pago'}}checked{{/xif}}
             />
             <label for="dizimista-{{id_familia}}"></label>
           </div>

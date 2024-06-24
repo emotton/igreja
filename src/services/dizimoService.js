@@ -13,6 +13,20 @@ async function selectDizimoByMes(mes) {
   return res[0];
 }
 
+async function insertDizimo(mes, id) {
+  const sql = `INSERT INTO dizimo_pagamento (mes, id_familia) VALUES (?, ?)`;
+  const values = [mes, id];
+  await client.query(sql, values);
+}
+
+async function deleteDizimo(mes, id) {
+  const sql = `DELETE FROM dizimo_pagamento where mes = ? and id_familia = ?`;
+  const values = [mes, id];
+  await client.query(sql, values);
+}
+
 module.exports = {
   selectDizimoByMes,
+  insertDizimo,
+  deleteDizimo,
 };
