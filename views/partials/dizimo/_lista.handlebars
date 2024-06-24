@@ -1,17 +1,15 @@
-<div class="dash-item">
+<div class="dash-full">
   <div class="titulo-lista">
     <span><a href="/dashboard/dizimo/list">Dizimo</a></span>
   </div>
-  <div class="mx-auto bg-white rounded shadow mt-2">
+  <div class="mx-auto bg-white rounded shadow mt-2 container-lg">
     <fieldset class="form-group">
-      <form
-        action="/dashboard/dizimo/save"
-        method="post"
-        class="container-sm row mt-3"
-      >
+      <form action="/dashboard/dizimo/save" method="post" class="row mt-3">
         {{#each familias}}
-          <div class="col-sm-11">{{nome}}</div>
-          <div class="switch__container col-sm-1">
+          <div class="col-10 mr-auto"><span
+              class="dizimo-texto"
+            >{{nome}}</span></div>
+          <div class="switch__container col-sm-auto ml-auto">
             <input
               id="dizimista-{{id_familia}}"
               name="dizimista-{{id_familia}}"

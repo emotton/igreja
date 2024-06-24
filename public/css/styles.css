@@ -509,6 +509,11 @@ td {
         margin-bottom: 5px;
     }
 
+    .dizimo-texto {
+        font-size: 0.5rem;
+        font-weight: bold;
+    }
+
     table,
     thead,
     tbody,
