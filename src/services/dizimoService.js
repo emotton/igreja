@@ -13,6 +13,18 @@ async function selectDizimoByMes(mes) {
   return res[0];
 }
 
+async function selectIdsDizimoByMes(mes) {
+  const res = await client.query(
+    `select f.id_familia ` +
+      `from familia f ` +
+      `inner join dizimo_pagamento dp on f.id_familia = dp.id_familia ` +
+      `and mes = ? ` +
+      `order by f.id_familia`,
+    [mes]
+  );
+  return res[0];
+}
+
 async function insertDizimo(mes, id) {
   const sql = `INSERT INTO dizimo_pagamento (mes, id_familia) VALUES (?, ?)`;
   const values = [mes, id];
@@ -27,6 +39,7 @@ async function deleteDizimo(mes, id) {
 
 module.exports = {
   selectDizimoByMes,
+  selectIdsDizimoByMes,
   insertDizimo,
   deleteDizimo,
 };
