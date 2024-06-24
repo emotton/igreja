@@ -23,6 +23,7 @@ const usuarioApi = require("./routes/api/usuario");
 const setorApi = require("./routes/api/setor");
 const familiaApi = require("./routes/api/familia");
 const pessoaApi = require("./routes/api/pessoa");
+const dizimoApi = require("./routes/api/dizimo");
 
 const app = express();
 
@@ -108,6 +109,7 @@ app.use("/dashboard/api/usuario", usuarioApi);
 app.use("/dashboard/api/setor", setorApi);
 app.use("/dashboard/api/familia", familiaApi);
 app.use("/dashboard/api/pessoa", pessoaApi);
+app.use("/dashboard/api/dizimo", dizimoApi);
 
 const PORT = process.env.PORT;
 
