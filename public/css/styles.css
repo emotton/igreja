@@ -236,7 +236,7 @@ tbody {
     display: block;
     overflow-y: auto;
     overflow-x: hidden;
-    height: 432px;
+    /* height: 432px; */
 }
 
 tr {

@@ -3,31 +3,40 @@
     <span><a href="/dashboard/dizimo/list">Dizimo</a></span>
   </div>
   <div class="mx-auto bg-white rounded shadow mt-2 container-lg">
+    <table class="table table-fixed table-striped table-dizimo">
     <fieldset class="form-group">
       <form action="/dashboard/dizimo/save" method="post" class="row mt-3">
+      <tbody>
         {{#each familias}}
-          <div class="col-5"><span
-              class="dizimo-texto"
-            >{{nome}}</span></div>
-            <div class="col-5"><span
-              class="dizimo-texto"
-            ><hr></span></div>
-          <div class="switch__container">
-            <input
-              id="dizimista-{{id_familia}}"
-              name="id_familia"
-              class="switch switch--shadow"
-              type="checkbox"
-              value="{{id_familia}}"
-              {{#xif status '==' 'pago'}}checked{{/xif}}
-            />
-            <label for="dizimista-{{id_familia}}"></label>
-          </div>
+        <tr class="row">
+          <td class="col-10">
+            <div><span class="dizimo-texto">{{nome}}</span></div>
+          </td>
+          <td class="col">
+            <div class="switch__container">
+              <input
+                id="dizimista-{{id_familia}}"
+                name="id_familia"
+                class="switch switch--shadow"
+                type="checkbox"
+                value="{{id_familia}}"
+                {{#xif status '==' 'pago'}}checked{{/xif}}
+              />
+              <label for="dizimista-{{id_familia}}"></label>
+            </div>
+         </td>
+        </tr>
         {{/each}}
-        <div class="text-center col-sm-12 mt-1 mb-1">
-          <button class="btn btn-primary" type="submit">Gravar</button>
-        </div>
+        <tr class="row">
+          <td class="col-12">
+          <div class="text-center col-sm-12 mt-1 mb-1">
+            <button class="btn btn-primary" type="submit">Gravar</button>
+          </div>
+          </td>
+        </tr>
+        </tbody>
       </form>
     </fieldset>
+    </table>
   </div>
 </div>
