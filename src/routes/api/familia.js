@@ -14,6 +14,13 @@ router.get("/:id", async (req, res) => {
   res.json(results[0]);
 });
 
+router.get("/search/:search", async (req, res) => {
+  const results = await familiaService.selectFamiliaByLikeNome(
+    req.params.search
+  );
+  res.json(results);
+});
+
 router.post(
   "/",
   body("id_setor")

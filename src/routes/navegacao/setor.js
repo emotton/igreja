@@ -10,7 +10,7 @@ const baseUrl = "dashboard/setor";
 const { logged } = require("../../helpers/logged");
 
 router.get("/reset", logged, (req, res) => {
-  req.session.searchIdSetor = undefined;
+  req.session.searchNomeSetor = undefined;
   res.redirect("/" + baseUrl + "/list");
 });
 
@@ -28,9 +28,11 @@ router.get("/view/:id", logged, async (req, res) => {
 });
 
 router.get("/list", logged, async (req, res) => {
-  let search = req.query.search ? req.query.search : req.session.searchIdSetor;
+  let search = req.query.search
+    ? req.query.search
+    : req.session.searchNomeSetor;
 
-  req.session.searchIdSetor = search;
+  req.session.searchNomeSetor = search;
 
   let lista = null;
   if (search != undefined) {

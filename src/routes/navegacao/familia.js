@@ -11,7 +11,7 @@ const baseUrl = "dashboard/familia";
 const { logged } = require("../../helpers/logged");
 
 router.get("/reset", logged, (req, res) => {
-  req.session.searchIdFamilia = undefined;
+  req.session.searchNomeFamilia = undefined;
   res.redirect("/" + baseUrl + "/list");
 });
 
@@ -40,11 +40,17 @@ router.get("/view/:id", logged, async (req, res) => {
 router.get("/list", logged, async (req, res) => {
   let search = req.query.search
     ? req.query.search
-    : req.session.searchIdFamilia;
+    : req.session.searchNomeFamilia;
 
-  req.session.searchIdFamilia = search;
+  req.session.searchNomeFamilia = search;
 
-  const lista = await axios.get(prefixUrl + apiFamiliaUrl);
+  let lista = null;
+  if (search != undefined) {
+    lista = await axios.get(prefixUrl + apiFamiliaUrl + "/search/" + search);
+  } else {
+    lista = await axios.get(prefixUrl + apiFamiliaUrl);
+  }
+
   const setores = await axios.get(prefixUrl + apiSetorUrl);
   res.render(baseUrl + "/index", {
     familias: lista.data,
@@ -55,8 +61,6 @@ router.get("/list", logged, async (req, res) => {
 });
 
 router.get("/edit/:id", logged, async (req, res) => {
-  let search = req.session.searchIdFamilia;
-
   const familia = await axios.get(
     prefixUrl + apiFamiliaUrl + "/" + req.params.id
   );
@@ -71,14 +75,11 @@ router.get("/edit/:id", logged, async (req, res) => {
     familias: lista.data,
     familia: familia.data,
     setores: setores.data,
-    search: search,
     anchor: "cadastro",
   });
 });
 
 router.get("/delete/:id", logged, async (req, res) => {
-  let search = req.session.searchIdFamilia;
-
   const familia = await axios.get(
     prefixUrl + apiFamiliaUrl + "/" + req.params.id
   );
@@ -93,7 +94,6 @@ router.get("/delete/:id", logged, async (req, res) => {
     familias: lista.data,
     familia: familia.data,
     setores: setores.data,
-    search: search,
     anchor: "cadastro",
   });
 });

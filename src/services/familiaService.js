@@ -17,6 +17,14 @@ async function selectFamiliaById(id) {
   return res[0];
 }
 
+async function selectFamiliaByLikeNome(nome) {
+  nome = `%${nome}%`;
+  const res = await client.query(`SELECT * FROM familia WHERE nome like ?`, [
+    nome,
+  ]);
+  return res[0];
+}
+
 async function insertFamilia(familia) {
   const sql =
     `INSERT INTO familia(nome, endereco, numero, id_setor) ` +
@@ -54,6 +62,7 @@ async function deleteFamilia(id) {
 module.exports = {
   selectFamilias,
   selectFamiliaById,
+  selectFamiliaByLikeNome,
   insertFamilia,
   updateFamilia,
   deleteFamilia,
