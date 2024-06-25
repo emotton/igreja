@@ -16,6 +16,13 @@ router.get("/:id", async (req, res) => {
   res.json(results[0]);
 });
 
+router.get("/search/:search", async (req, res) => {
+  const results = await usuarioService.selectUsuarioByLikeNome(
+    req.params.search
+  );
+  res.json(results);
+});
+
 router.post(
   "/",
   body("login")

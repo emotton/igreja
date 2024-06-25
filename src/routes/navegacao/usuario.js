@@ -10,7 +10,7 @@ const baseUrl = "dashboard/usuario";
 const { logged } = require("../../helpers/logged");
 
 router.get("/reset", logged, (req, res) => {
-  req.session.searchIdUsuario = undefined;
+  req.session.nomeUsuario = undefined;
   res.redirect("/" + baseUrl + "/list");
 });
 
@@ -30,13 +30,20 @@ router.get("/view/:id", logged, async (req, res) => {
 });
 
 router.get("/list", logged, async (req, res) => {
-  let search = req.query.search
-    ? req.query.search
-    : req.session.searchIdUsuario;
+  let search = req.query.search ? req.query.search : req.session.nomeUsuario;
+  req.session.nomeUsuario = search;
 
-  req.session.searchIdUsuario = search;
+  console.log(search);
 
-  const lista = await axios.get(prefixUrl + apiUsuarioUrl);
+  let lista = null;
+  if (search != undefined) {
+    lista = await axios.get(prefixUrl + apiUsuarioUrl + "/search/" + search);
+  } else {
+    lista = await axios.get(prefixUrl + apiUsuarioUrl);
+  }
+
+  console.log(lista.data);
+
   res.render(baseUrl + "/index", {
     usuarios: lista.data,
     search: search,

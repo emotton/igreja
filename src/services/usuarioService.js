@@ -12,6 +12,16 @@ async function selectUsuarioById(id) {
   return res[0];
 }
 
+async function selectUsuarioByLikeNome(nome) {
+  nome = `%${nome}%`;
+  console.log(nome);
+  const res = await client.query(`SELECT * FROM usuario WHERE nome like ?`, [
+    nome,
+  ]);
+  console.log(res[0]);
+  return res[0];
+}
+
 async function selectUsuarioByLogin(login) {
   const res = await client.query(`SELECT * FROM usuario WHERE login=?`, [
     login,
@@ -46,6 +56,7 @@ module.exports = {
   selectUsuarios,
   selectUsuarioById,
   selectUsuarioByLogin,
+  selectUsuarioByLikeNome,
   insertUsuario,
   updateUsuario,
   deleteUsuario,
