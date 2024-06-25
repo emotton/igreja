@@ -15,8 +15,6 @@ router.get("/reset", logged, (req, res) => {
 });
 
 router.get("/view/:id", logged, async (req, res) => {
-  let search = req.session.searchIdUsuario;
-
   const usuario = await axios.get(
     prefixUrl + apiUsuarioUrl + "/" + req.params.id
   );
@@ -24,16 +22,15 @@ router.get("/view/:id", logged, async (req, res) => {
   res.render(baseUrl + "/consultar", {
     usuarios: lista.data,
     usuario: usuario.data,
-    search: search,
     anchor: "cadastro",
   });
 });
 
 router.get("/list", logged, async (req, res) => {
-  let search = req.query.search ? req.query.search : req.session.nomeUsuario;
-  req.session.nomeUsuario = search;
-
-  console.log(search);
+  let search = req.query.search
+    ? req.query.search
+    : req.session.searchNomeUsuario;
+  req.session.searchNomeUsuario = search;
 
   let lista = null;
   if (search != undefined) {
@@ -41,8 +38,6 @@ router.get("/list", logged, async (req, res) => {
   } else {
     lista = await axios.get(prefixUrl + apiUsuarioUrl);
   }
-
-  console.log(lista.data);
 
   res.render(baseUrl + "/index", {
     usuarios: lista.data,
@@ -52,8 +47,6 @@ router.get("/list", logged, async (req, res) => {
 });
 
 router.get("/edit/:id", logged, async (req, res) => {
-  let search = req.session.searchIdUsuario;
-
   const usuario = await axios.get(
     prefixUrl + apiUsuarioUrl + "/" + req.params.id
   );
@@ -61,14 +54,11 @@ router.get("/edit/:id", logged, async (req, res) => {
   res.render(baseUrl + "/alterar", {
     usuarios: lista.data,
     usuario: usuario.data,
-    search: search,
     anchor: "cadastro",
   });
 });
 
 router.get("/delete/:id", logged, async (req, res) => {
-  let search = req.session.searchIdUsuario;
-
   const usuario = await axios.get(
     prefixUrl + apiUsuarioUrl + "/" + req.params.id
   );
@@ -76,7 +66,6 @@ router.get("/delete/:id", logged, async (req, res) => {
   res.render(baseUrl + "/excluir", {
     usuarios: lista.data,
     usuario: usuario.data,
-    search: search,
     anchor: "cadastro",
   });
 });

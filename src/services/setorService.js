@@ -10,6 +10,14 @@ async function selectSetorById(id) {
   return res[0];
 }
 
+async function selectSetorByLikeNome(nome) {
+  nome = `%${nome}%`;
+  const res = await client.query(`SELECT * FROM setor WHERE nome like ?`, [
+    nome,
+  ]);
+  return res[0];
+}
+
 async function insertSetor(setor) {
   const sql = `INSERT INTO setor(nome) VALUES (?);`;
   const values = [setor.nome];
@@ -31,6 +39,7 @@ async function deleteSetor(id) {
 module.exports = {
   selectSetores,
   selectSetorById,
+  selectSetorByLikeNome,
   insertSetor,
   updateSetor,
   deleteSetor,

@@ -14,6 +14,11 @@ router.get("/:id", async (req, res) => {
   res.json(results[0]);
 });
 
+router.get("/search/:search", async (req, res) => {
+  const results = await setorService.selectSetorByLikeNome(req.params.search);
+  res.json(results);
+});
+
 router.post(
   "/",
   body("nome")

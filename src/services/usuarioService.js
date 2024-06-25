@@ -14,11 +14,9 @@ async function selectUsuarioById(id) {
 
 async function selectUsuarioByLikeNome(nome) {
   nome = `%${nome}%`;
-  console.log(nome);
   const res = await client.query(`SELECT * FROM usuario WHERE nome like ?`, [
     nome,
   ]);
-  console.log(res[0]);
   return res[0];
 }
 

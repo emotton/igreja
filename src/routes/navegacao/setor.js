@@ -32,7 +32,13 @@ router.get("/list", logged, async (req, res) => {
 
   req.session.searchIdSetor = search;
 
-  const lista = await axios.get(prefixUrl + apiSetorUrl);
+  let lista = null;
+  if (search != undefined) {
+    lista = await axios.get(prefixUrl + apiSetorUrl + "/search/" + search);
+  } else {
+    lista = await axios.get(prefixUrl + apiSetorUrl);
+  }
+
   res.render(baseUrl + "/index", {
     setores: lista.data,
     search: search,
@@ -41,27 +47,21 @@ router.get("/list", logged, async (req, res) => {
 });
 
 router.get("/edit/:id", logged, async (req, res) => {
-  let search = req.session.searchIdSetor;
-
   const setor = await axios.get(prefixUrl + apiSetorUrl + "/" + req.params.id);
   const lista = await axios.get(prefixUrl + apiSetorUrl);
   res.render(baseUrl + "/alterar", {
     setores: lista.data,
     setor: setor.data,
-    search: search,
     anchor: "cadastro",
   });
 });
 
 router.get("/delete/:id", logged, async (req, res) => {
-  let search = req.session.searchIdSetor;
-
   const setor = await axios.get(prefixUrl + apiSetorUrl + "/" + req.params.id);
   const lista = await axios.get(prefixUrl + apiSetorUrl);
   res.render(baseUrl + "/excluir", {
     setores: lista.data,
     setor: setor.data,
-    search: search,
     anchor: "cadastro",
   });
 });
