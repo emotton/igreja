@@ -4,3 +4,24 @@
   </div>
   <img src="/images/matriz.png" style="max-width: 100%; height: auto;" />
 </div>
+<section id="diarioProdutoGrafico" class="cardx mt-4">
+  <h3>Gráfico Dízimo</h3>
+  <canvas id="diarioProdutoGraficoImg" width="600" height="300"></canvas>
+  <input
+    type="hidden"
+    id="legendaProdutosGrafico"
+    value="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro"
+  />
+  <input
+    type="hidden"
+    id="diarioProdutoGraficoOn"
+    value="{{diarioProdutoGrafico.dataOn}}"
+  />
+  <input
+    type="hidden"
+    id="diarioProdutoGraficoOff"
+    value="{{diarioProdutoGrafico.dataOff}}"
+  />
+</section>
+<script src="/js/grafico.js">
+</script>
