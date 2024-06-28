@@ -18,7 +18,8 @@ module.exports = function (passport) {
               login: usu[0].login,
               senha: usu[0].senha,
             };
-            if (senha == usuario.senha) {
+            let hash = crypto.createHash("md5").update(senha).digest("hex");
+            if (hash == usuario.senha) {
               return done(null, usuario);
             } else {
               return done(null, false, {

@@ -28,13 +28,13 @@ async function selectUsuarioByLogin(login) {
 }
 
 async function insertUsuario(usuario) {
-  const sql = `INSERT INTO usuario(nome,login,senha) VALUES (?,?,?);`;
+  const sql = `INSERT INTO usuario(nome,login,senha) VALUES (?,?,md5(?));`;
   const values = [usuario.nome, usuario.login, usuario.senha];
   await client.query(sql, values);
 }
 
 async function updateUsuario(usuario) {
-  const sql = `UPDATE usuario set nome=?,login=?,senha=? WHERE id_usuario = ?`;
+  const sql = `UPDATE usuario set nome=?,login=?,senha=md5(?) WHERE id_usuario = ?`;
   const values = [
     usuario.nome,
     usuario.login,
