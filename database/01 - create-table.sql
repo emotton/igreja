@@ -33,7 +33,7 @@ alter table usuario
 create table familia
 (
     id_familia int auto_increment,
-    nome       varchar(30) not null,
+    nome       varchar(40) not null,
     id_setor   int         not null,
     endereco   varchar(40) null,
     numero     varchar(10) null,
@@ -58,7 +58,7 @@ create table dizimo_pagamento
 create table pessoa
 (
     id_pessoa  int auto_increment,
-    nome       varchar(30) not null,
+    nome       varchar(40) not null,
     id_familia int         not null,
     constraint pessoa_id_pessoa_uindex
         unique (id_pessoa),

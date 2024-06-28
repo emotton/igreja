@@ -27,8 +27,8 @@ router.post(
     .isInt({ min: 1 })
     .withMessage("Id Setor deve ser informado e numérico"),
   body("nome")
-    .isLength({ min: 3, max: 30 })
-    .withMessage("Nome entre 3 e 30 caracteres"),
+    .isLength({ min: 3, max: 40 })
+    .withMessage("Nome entre 3 e 40 caracteres"),
   body("endereco")
     .isLength({ max: 40 })
     .withMessage("Endereço máximo de 40 caracteres"),
@@ -54,8 +54,8 @@ router.patch(
     .isInt({ min: 1 })
     .withMessage("Id Setor deve ser informado e numérico"),
   body("nome")
-    .isLength({ min: 3, max: 30 })
-    .withMessage("Nome entre 3 e 30 caracteres"),
+    .isLength({ min: 3, max: 40 })
+    .withMessage("Nome entre 3 e 40 caracteres"),
   body("endereco")
     .isLength({ max: 40 })
     .withMessage("Endereço máximo de 40 caracteres"),

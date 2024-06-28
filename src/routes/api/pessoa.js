@@ -25,8 +25,8 @@ router.post(
     .isInt({ min: 1 })
     .withMessage("Id Familia deve ser informado e numérico"),
   body("nome")
-    .isLength({ min: 3, max: 30 })
-    .withMessage("Nome entre 3 e 30 caracteres"),
+    .isLength({ min: 3, max: 40 })
+    .withMessage("Nome entre 3 e 40 caracteres"),
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -43,8 +43,8 @@ router.patch(
     .isInt({ min: 1 })
     .withMessage("Id Familia deve ser informado e numérico"),
   body("nome")
-    .isLength({ min: 3, max: 30 })
-    .withMessage("Nome entre 3 e 30 caracteres"),
+    .isLength({ min: 3, max: 40 })
+    .withMessage("Nome entre 3 e 40 caracteres"),
   body("id_pessoa")
     .isInt({ min: 1 })
     .withMessage("Id Pessoa deve ser informado e numérico"),
