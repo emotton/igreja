@@ -30,21 +30,23 @@ create table usuario
 alter table usuario
     add primary key (id_usuario);
 
-create table familia
+create or replace table familia
 (
-    id_familia int auto_increment,
-    nome       varchar(40) not null,
-    id_setor   int         not null,
-    endereco   varchar(40) null,
-    numero     varchar(10) null,
-    constraint familia_id_familia_uindex
-        unique (id_familia),
-    constraint familia_nome_uindex
-        unique (nome)
+	id_familia int auto_increment,
+	nome varchar(40) not null,
+	id_setor int not null,
+	endereco varchar(40) null,
+	numero varchar(10) null,
+	constraint familia_id_familia_uindex
+		unique (id_familia),
+	constraint familia_nome_uindex
+		unique (nome),
+	constraint familia_setor_id_setor_fk
+		foreign key (id_setor) references setor (id_setor)
 );
 
 alter table familia
-    add primary key (id_familia);
+	add primary key (id_familia);
 
 create table dizimo_pagamento
 (
