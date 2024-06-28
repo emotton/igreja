@@ -1,3 +1,29 @@
+create table setor
+(
+    id_setor int auto_increment,
+    nome     varchar(30) not null,
+    constraint setor_id_setor_uindex
+        unique (id_setor),
+    constraint setor_nome_uindex
+        unique (nome)
+);
+
+alter table setor
+    add primary key (id_setor);
+
+create table usuario
+(
+    id_usuario int auto_increment,
+    nome       varchar(30)  not null,
+    login      varchar(30)  not null,
+    senha      varchar(100) null,
+    constraint usuario_id_usuario_uindex
+        unique (id_usuario)
+);
+
+alter table usuario
+    add primary key (id_usuario);
+
 create table familia
 (
     id_familia int auto_increment,
@@ -36,30 +62,4 @@ create table pessoa
 
 alter table pessoa
     add primary key (id_pessoa);
-
-create table setor
-(
-    id_setor int auto_increment,
-    nome     varchar(30) not null,
-    constraint setor_id_setor_uindex
-        unique (id_setor),
-    constraint setor_nome_uindex
-        unique (nome)
-);
-
-alter table setor
-    add primary key (id_setor);
-
-create table usuario
-(
-    id_usuario int auto_increment,
-    nome       varchar(30)  not null,
-    login      varchar(30)  not null,
-    senha      varchar(100) null,
-    constraint usuario_id_usuario_uindex
-        unique (id_usuario)
-);
-
-alter table usuario
-    add primary key (id_usuario);
 
