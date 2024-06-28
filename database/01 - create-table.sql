@@ -1,3 +1,9 @@
+drop table dizimo_pagamento;
+drop table pessoa;
+drop table familia;
+drop table setor;
+drop table usuario;
+
 create table setor
 (
     id_setor int auto_increment,
@@ -63,3 +69,7 @@ create table pessoa
 alter table pessoa
     add primary key (id_pessoa);
 
+insert into usuario
+(nome, login, senha)
+values
+('Eduardo Fratoni Motton', 'emotton', md5('senha'));
