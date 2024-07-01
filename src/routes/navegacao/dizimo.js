@@ -51,8 +51,7 @@ router.post("/save", logged, async (req, res) => {
     var novo = [];
     if (Array.isArray(req.body.id_familia)) {
       // Transformar em numeros
-      novo = req.body.id_familia;
-      novo = novo.map(function (e) {
+      novo = req.body.id_familia.map(function (e) {
         return Number(e);
       });
     } else {
