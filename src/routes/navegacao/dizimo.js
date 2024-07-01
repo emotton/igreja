@@ -58,8 +58,6 @@ router.post("/save", logged, async (req, res) => {
     } else {
       if (typeof req.body.id_familia != "undefined") {
         novo = [Number(req.body.id_familia)];
-      } else {
-        novo = [];
       }
     }
     await axios
