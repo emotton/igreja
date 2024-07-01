@@ -48,11 +48,20 @@ router.post("/save", logged, async (req, res) => {
     req.flash("success_msg", "Gravação com sucesso !");
     res.redirect("/" + baseUrl + "/list");
   } else {
-    // Transformar em numeros
-    var novo = req.body.id_familia;
-    novo = novo.map(function (e) {
-      return Number(e);
-    });
+    var novo = [];
+    if (Array.isArray(req.body.id_familia)) {
+      // Transformar em numeros
+      novo = req.body.id_familia;
+      novo = novo.map(function (e) {
+        return Number(e);
+      });
+    } else {
+      if (typeof req.body.id_familia != "undefined") {
+        novo = [Number(req.body.id_familia)];
+      } else {
+        novo = [];
+      }
+    }
     await axios
       .patch(prefixUrl + apiDizimoUrl, {
         mes: periodo,
