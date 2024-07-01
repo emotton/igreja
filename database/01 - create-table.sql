@@ -3,6 +3,7 @@ drop table pessoa;
 drop table familia;
 drop table setor;
 drop table usuario;
+drop table dizimo;
 
 create table setor
 (
@@ -47,6 +48,17 @@ create or replace table familia
 
 alter table familia
 	add primary key (id_familia);
+
+create table dizimo
+(
+    mes   varchar(6)                  not null,
+    valor decimal(12, 2) default 0.00 null,
+    constraint dizimo_mes_uindex
+        unique (mes)
+);
+
+alter table dizimo
+    add primary key (mes);    
 
 create table dizimo_pagamento
 (
