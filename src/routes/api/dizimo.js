@@ -3,6 +3,8 @@ const router = express.Router();
 const { param, body, validationResult } = require("express-validator");
 const _ = require("underscore");
 
+const { verifyJWT } = require("../../helpers/authAPI");
+
 const dizimoService = require("../../services/dizimoService");
 
 router.get(
@@ -10,6 +12,7 @@ router.get(
   param("mes")
     .isLength({ min: 6, max: 6 })
     .withMessage("Ano e mês deve ser informado AAAAMM"),
+  verifyJWT,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
