@@ -19,6 +19,7 @@ const pessoa = require("./routes/navegacao/pessoa");
 const dizimo = require("./routes/navegacao/dizimo");
 
 // rotas de API
+const loginApi = require("./routes/api/login");
 const usuarioApi = require("./routes/api/usuario");
 const setorApi = require("./routes/api/setor");
 const familiaApi = require("./routes/api/familia");
@@ -39,7 +40,7 @@ app.use(
     store: new MemoryStore({
       checkPeriod: (86400000 / 24 / 60) * 15,
     }),
-    secret: "saopiotech",
+    secret: process.env.SECRET_SESSION,
     resave: true,
     saveUninitialized: true,
   })
@@ -105,6 +106,7 @@ app.use("/dashboard/pessoa", pessoa);
 app.use("/dashboard/dizimo", dizimo);
 
 // API
+app.use("/dashboard/api/login", loginApi);
 app.use("/dashboard/api/usuario", usuarioApi);
 app.use("/dashboard/api/setor", setorApi);
 app.use("/dashboard/api/familia", familiaApi);
