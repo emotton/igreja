@@ -1,0 +1,29 @@
+<div id="frmDizimo" class="dash-form">
+  <div class="titulo-lista">
+    <span><a href="/dashboard/dizimo/list">Dizimo</a></span>
+  </div>
+  <div class="row form-group">
+    <div class="col-sm-12 mx-auto bg-white rounded shadow table-striped">
+      <fieldset class="form-group">
+        <form action="/dashboard/dizimo/save" method="post" class="formulario">
+          <label for="valor">Valor Total:</label>
+          <input
+            type="text"
+            id="valor"
+            name="valor"
+            class="form-control"
+            placeholder="Valor Dízimo Mensal"
+            value="{{valor}}"
+            data-thousands=""
+          />
+          <br />
+          <br />
+          <div class="text-center">
+            <button class="btn btn-primary" type="reset">Cancelar</button>
+            <button class="btn btn-primary" type="submit">Gravar</button>
+          </div>
+        </form>
+      </fieldset>
+    </div>
+  </div>
+</div>

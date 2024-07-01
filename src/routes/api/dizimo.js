@@ -15,8 +15,25 @@ router.get(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const results = await dizimoService.selectDizimoByMes(req.params.mes);
+    const results = await dizimoService.selectDizimoPagamentoByMes(
+      req.params.mes
+    );
     res.json(results);
+  }
+);
+
+router.get(
+  "/:mes/valor",
+  param("mes")
+    .isLength({ min: 6, max: 6 })
+    .withMessage("Ano e mês deve ser informado AAAAMM"),
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    const results = await dizimoService.selectDizimoByMes(req.params.mes);
+    res.json(results[0]);
   }
 );
 
@@ -33,9 +50,28 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const results = await dizimoService.insertDizimo(
+    const results = await dizimoService.insertDizimoPagamento(
       req.body.mes,
       req.body.id_familia
+    );
+    res.sendStatus(201);
+  }
+);
+
+router.post(
+  "/valor",
+  body("mes")
+    .isLength({ min: 6, max: 6 })
+    .withMessage("Ano e mês deve ser informado AAAAMM"),
+  body("valor").isFloat().withMessage("Valor deve ser informado"),
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    const results = await dizimoService.insertDizimo(
+      req.body.mes,
+      req.body.valor
     );
     res.sendStatus(201);
   }
@@ -54,7 +90,7 @@ router.delete(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const results = await dizimoService.deleteDizimo(
+    const results = await dizimoService.deleteDizimoPagamento(
       req.body.mes,
       req.body.id_familia
     );
@@ -73,7 +109,9 @@ router.patch(
       return res.status(400).json({ errors: errors.array() });
     }
     const novo = req.body.id_familia;
-    const base = await dizimoService.selectIdsDizimoByMes(req.body.mes);
+    const base = await dizimoService.selectIdsDizimoPagamentoByMes(
+      req.body.mes
+    );
     const anterior = base.map(function (e) {
       return e.id_familia;
     });
@@ -81,13 +119,32 @@ router.patch(
     const incluir = _.difference(novo, anterior);
 
     remover.forEach((id) => {
-      dizimoService.deleteDizimo(req.body.mes, id);
+      dizimoService.deleteDizimoPagamento(req.body.mes, id);
     });
 
     incluir.forEach((id) => {
-      dizimoService.insertDizimo(req.body.mes, id);
+      dizimoService.insertDizimoPagamento(req.body.mes, id);
     });
 
+    res.sendStatus(200);
+  }
+);
+
+router.patch(
+  "/valor",
+  body("mes")
+    .isLength({ min: 6, max: 6 })
+    .withMessage("Ano e mês deve ser informado AAAAMM"),
+  body("valor").isFloat().withMessage("Valor deve ser informado"),
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    const results = await dizimoService.updateDizimo(
+      req.body.mes,
+      req.body.valor
+    );
     res.sendStatus(200);
   }
 );
