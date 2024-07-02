@@ -1,22 +1,23 @@
 const express = require("express");
 const router = express.Router();
 const { body, validationResult } = require("express-validator");
+const { tokenJWT } = require("../../helpers/authAPI");
 
 const usuarioService = require("../../services/usuarioService");
 
 const { logged } = require("../../helpers/logged");
 
-router.get("/", async (req, res) => {
+router.get("/", tokenJWT, async (req, res) => {
   const results = await usuarioService.selectUsuarios();
   res.json(results);
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", tokenJWT, async (req, res) => {
   const results = await usuarioService.selectUsuarioById(req.params.id);
   res.json(results[0]);
 });
 
-router.get("/search/:search", async (req, res) => {
+router.get("/search/:search", tokenJWT, async (req, res) => {
   const results = await usuarioService.selectUsuarioByLikeNome(
     req.params.search
   );
@@ -34,6 +35,7 @@ router.post(
   body("senha")
     .isLength({ min: 4, max: 30 })
     .withMessage("Senha entre 4 e 30 caracteres"),
+  tokenJWT,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -65,6 +67,7 @@ router.patch(
   body("id_usuario")
     .isInt({ min: 1 })
     .withMessage("Id usuario deve ser informado e numérico"),
+  tokenJWT,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -83,7 +86,7 @@ router.patch(
   }
 );
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", tokenJWT, async (req, res) => {
   const results = await usuarioService.deleteUsuario(req.params.id);
   res.sendStatus(204);
 });

@@ -2,19 +2,20 @@ const express = require("express");
 const router = express.Router();
 const { body, validationResult } = require("express-validator");
 
+const { tokenJWT } = require("../../helpers/authAPI");
 const familiaService = require("../../services/familiaService");
 
-router.get("/", async (req, res) => {
+router.get("/", tokenJWT, async (req, res) => {
   const results = await familiaService.selectFamilias();
   res.json(results);
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", tokenJWT, async (req, res) => {
   const results = await familiaService.selectFamiliaById(req.params.id);
   res.json(results[0]);
 });
 
-router.get("/search/:search", async (req, res) => {
+router.get("/search/:search", tokenJWT, async (req, res) => {
   const results = await familiaService.selectFamiliaByLikeNome(
     req.params.search
   );
@@ -35,6 +36,7 @@ router.post(
   body("numero")
     .isLength({ max: 10 })
     .withMessage("Número máximo de 10 caracteres"),
+  tokenJWT,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -62,6 +64,7 @@ router.patch(
   body("numero")
     .isLength({ max: 10 })
     .withMessage("Número máximo de 10 caracteres"),
+  tokenJWT,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -72,7 +75,7 @@ router.patch(
   }
 );
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", tokenJWT, async (req, res) => {
   const results = await familiaService.deleteFamilia(req.params.id);
   res.sendStatus(204);
 });

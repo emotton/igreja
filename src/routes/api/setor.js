@@ -2,19 +2,20 @@ const express = require("express");
 const router = express.Router();
 const { body, validationResult } = require("express-validator");
 
+const { tokenJWT } = require("../../helpers/authAPI");
 const setorService = require("../../services/setorService");
 
-router.get("/", async (req, res) => {
+router.get("/", tokenJWT, async (req, res) => {
   const results = await setorService.selectSetores();
   res.json(results);
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", tokenJWT, async (req, res) => {
   const results = await setorService.selectSetorById(req.params.id);
   res.json(results[0]);
 });
 
-router.get("/search/:search", async (req, res) => {
+router.get("/search/:search", tokenJWT, async (req, res) => {
   const results = await setorService.selectSetorByLikeNome(req.params.search);
   res.json(results);
 });
@@ -24,6 +25,7 @@ router.post(
   body("nome")
     .isLength({ min: 5, max: 30 })
     .withMessage("Nome entre 5 e 30 caracteres"),
+  tokenJWT,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -42,6 +44,7 @@ router.patch(
   body("id_setor")
     .isInt({ min: 1 })
     .withMessage("Id setor deve ser informado e numérico"),
+  tokenJWT,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -52,7 +55,7 @@ router.patch(
   }
 );
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", tokenJWT, async (req, res) => {
   const results = await setorService.deleteSetor(req.params.id);
   res.sendStatus(204);
 });

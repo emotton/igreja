@@ -6,7 +6,6 @@ const axios = require("axios");
 const prefixUrl = "http://localhost:3000/";
 const apiDizimoUrl = "dashboard/api/dizimo";
 const baseUrl = "dashboard/dizimo";
-
 const { logged } = require("../../helpers/logged");
 
 router.get("/list", logged, async (req, res) => {
@@ -15,9 +14,18 @@ router.get("/list", logged, async (req, res) => {
   var ano = data.getFullYear();
   var periodo = ano + mes;
   const valor = await axios.get(
-    prefixUrl + apiDizimoUrl + "/" + periodo + "/valor"
+    prefixUrl + apiDizimoUrl + "/" + periodo + "/valor",
+    {
+      headers: {
+        authorization: req.session.token,
+      },
+    }
   );
-  const lista = await axios.get(prefixUrl + apiDizimoUrl + "/" + periodo);
+  const lista = await axios.get(prefixUrl + apiDizimoUrl + "/" + periodo, {
+    headers: {
+      authorization: req.session.token,
+    },
+  });
   res.render(baseUrl + "/index", {
     familias: lista.data,
     valor: valor.data.valor,
@@ -32,18 +40,39 @@ router.post("/save", logged, async (req, res) => {
 
   if (req.body.valor) {
     const valor = await axios.get(
-      prefixUrl + apiDizimoUrl + "/" + periodo + "/valor"
+      prefixUrl + apiDizimoUrl + "/" + periodo + "/valor",
+      {
+        headers: {
+          authorization: req.session.token,
+        },
+      }
     );
     if (valor.data == "") {
-      await axios.post(prefixUrl + apiDizimoUrl + "/valor", {
-        mes: periodo,
-        valor: req.body.valor,
-      });
+      await axios.post(
+        prefixUrl + apiDizimoUrl + "/valor",
+        {
+          mes: periodo,
+          valor: req.body.valor,
+        },
+        {
+          headers: {
+            authorization: req.session.token,
+          },
+        }
+      );
     } else {
-      await axios.patch(prefixUrl + apiDizimoUrl + "/valor", {
-        mes: periodo,
-        valor: req.body.valor,
-      });
+      await axios.patch(
+        prefixUrl + apiDizimoUrl + "/valor",
+        {
+          mes: periodo,
+          valor: req.body.valor,
+        },
+        {
+          headers: {
+            authorization: req.session.token,
+          },
+        }
+      );
     }
     req.flash("success_msg", "Gravação com sucesso !");
     res.redirect("/" + baseUrl + "/list");
@@ -60,10 +89,18 @@ router.post("/save", logged, async (req, res) => {
       }
     }
     await axios
-      .patch(prefixUrl + apiDizimoUrl, {
-        mes: periodo,
-        id_familia: novo,
-      })
+      .patch(
+        prefixUrl + apiDizimoUrl,
+        {
+          mes: periodo,
+          id_familia: novo,
+        },
+        {
+          headers: {
+            authorization: req.session.token,
+          },
+        }
+      )
       .catch((error) => {
         let msg = [];
         if (error.response.data.errors != undefined) {

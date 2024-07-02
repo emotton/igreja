@@ -19,13 +19,28 @@ router.get("/view/:id", logged, async (req, res) => {
   let search = req.session.searchIdPessoa;
 
   const pessoa = await axios.get(
-    prefixUrl + apiPessoaUrl + "/" + req.params.id
+    prefixUrl + apiPessoaUrl + "/" + req.params.id,
+    {
+      headers: {
+        authorization: req.session.token,
+      },
+    }
   );
   const familia = await axios.get(
-    prefixUrl + apiFamiliaUrl + "/" + pessoa.data.id_familia
+    prefixUrl + apiFamiliaUrl + "/" + pessoa.data.id_familia,
+    {
+      headers: {
+        authorization: req.session.token,
+      },
+    }
   );
   const lista = await axios.get(
-    prefixUrl + apiPessoaUrl + "/familia/" + pessoa.data.id_familia
+    prefixUrl + apiPessoaUrl + "/familia/" + pessoa.data.id_familia,
+    {
+      headers: {
+        authorization: req.session.token,
+      },
+    }
   );
   res.render(baseUrl + "/consultar", {
     familia: familia.data,
@@ -42,10 +57,20 @@ router.get("/familia/:id", logged, async (req, res) => {
   req.session.searchIdPessoa = search;
 
   const familia = await axios.get(
-    prefixUrl + apiFamiliaUrl + "/" + req.params.id
+    prefixUrl + apiFamiliaUrl + "/" + req.params.id,
+    {
+      headers: {
+        authorization: req.session.token,
+      },
+    }
   );
   const lista = await axios.get(
-    prefixUrl + apiPessoaUrl + "/familia/" + req.params.id
+    prefixUrl + apiPessoaUrl + "/familia/" + req.params.id,
+    {
+      headers: {
+        authorization: req.session.token,
+      },
+    }
   );
   res.render(baseUrl + "/index", {
     idFamilia: req.params.id,
@@ -60,13 +85,28 @@ router.get("/edit/:id", logged, async (req, res) => {
   let search = req.session.searchIdPessoa;
 
   const pessoa = await axios.get(
-    prefixUrl + apiPessoaUrl + "/" + req.params.id
+    prefixUrl + apiPessoaUrl + "/" + req.params.id,
+    {
+      headers: {
+        authorization: req.session.token,
+      },
+    }
   );
   const familia = await axios.get(
-    prefixUrl + apiFamiliaUrl + "/" + pessoa.data.id_familia
+    prefixUrl + apiFamiliaUrl + "/" + pessoa.data.id_familia,
+    {
+      headers: {
+        authorization: req.session.token,
+      },
+    }
   );
   const lista = await axios.get(
-    prefixUrl + apiPessoaUrl + "/familia/" + pessoa.data.id_familia
+    prefixUrl + apiPessoaUrl + "/familia/" + pessoa.data.id_familia,
+    {
+      headers: {
+        authorization: req.session.token,
+      },
+    }
   );
   res.render(baseUrl + "/alterar", {
     familia: familia.data,
@@ -81,13 +121,28 @@ router.get("/delete/:id", logged, async (req, res) => {
   let search = req.session.searchIdPessoa;
 
   const pessoa = await axios.get(
-    prefixUrl + apiPessoaUrl + "/" + req.params.id
+    prefixUrl + apiPessoaUrl + "/" + req.params.id,
+    {
+      headers: {
+        authorization: req.session.token,
+      },
+    }
   );
   const familia = await axios.get(
-    prefixUrl + apiFamiliaUrl + "/" + pessoa.data.id_familia
+    prefixUrl + apiFamiliaUrl + "/" + pessoa.data.id_familia,
+    {
+      headers: {
+        authorization: req.session.token,
+      },
+    }
   );
   const lista = await axios.get(
-    prefixUrl + apiPessoaUrl + "/familia/" + pessoa.data.id_familia
+    prefixUrl + apiPessoaUrl + "/familia/" + pessoa.data.id_familia,
+    {
+      headers: {
+        authorization: req.session.token,
+      },
+    }
   );
   res.render(baseUrl + "/excluir", {
     familia: familia.data,
@@ -100,7 +155,11 @@ router.get("/delete/:id", logged, async (req, res) => {
 
 router.post("/save", logged, (req, res) => {
   axios
-    .post(prefixUrl + apiPessoaUrl, req.body)
+    .post(prefixUrl + apiPessoaUrl, req.body, {
+      headers: {
+        authorization: req.session.token,
+      },
+    })
     .then(() => {
       req.flash("success_msg", "Inclusão com sucesso !");
     })
@@ -123,7 +182,11 @@ router.post("/save", logged, (req, res) => {
 
 router.post("/update", logged, (req, res) => {
   axios
-    .patch(prefixUrl + apiPessoaUrl, req.body)
+    .patch(prefixUrl + apiPessoaUrl, req.body, {
+      headers: {
+        authorization: req.session.token,
+      },
+    })
     .then(() => {
       req.flash("success_msg", "Alteração com sucesso !");
     })
@@ -146,7 +209,11 @@ router.post("/update", logged, (req, res) => {
 
 router.post("/delete", logged, async (req, res) => {
   await axios
-    .delete(prefixUrl + apiPessoaUrl + "/" + req.body.id_pessoa)
+    .delete(prefixUrl + apiPessoaUrl + "/" + req.body.id_pessoa, {
+      headers: {
+        authorization: req.session.token,
+      },
+    })
     .then(() => {
       req.flash("success_msg", "Exclusão com sucesso !");
     })

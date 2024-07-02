@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 module.exports = {
-  verifyJWT: function (req, res, next) {
+  tokenJWT: function (req, res, next) {
     const token = req.headers["authorization"];
 
     if (!token)
@@ -17,12 +17,10 @@ module.exports = {
 
       // se tudo estiver ok, salva no request para uso posterior
       if (decoded.type !== "access") {
-        return res
-          .status(500)
-          .json({
-            auth: false,
-            message: "Failed to authenticate token. [Refresh]",
-          });
+        return res.status(500).json({
+          auth: false,
+          message: "Failed to authenticate token. [Refresh]",
+        });
       }
       req.userId = decoded.id;
       next();

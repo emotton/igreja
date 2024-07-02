@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 
 const usuarioService = require("../../services/usuarioService");
 
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
   const usuario = await usuarioService.selectUsuarioByLogin(req.body.login);
   if (
     crypto.createHash("md5").update(req.body.senha).digest("hex") ==
@@ -19,14 +19,14 @@ router.get("/", async (req, res) => {
       { id, user: login, type: "access" },
       process.env.SECRET_TOKEN,
       {
-        expiresIn: 300, // expires in 5min
+        expiresIn: 60 * 60 * 24, // 24 horas
       }
     );
     const refresh_token = jwt.sign(
       { id, user: login, type: "refresh" },
       process.env.SECRET_TOKEN,
       {
-        expiresIn: 3000, // expires in 50min
+        expiresIn: 60 * 60 * 24 * 3, // 3 dias
       }
     );
     res.json({ success: true, access_token, refresh_token });
@@ -63,12 +63,10 @@ router.get("/refresh", async (req, res) => {
       );
       res.json({ success: true, access_token, refresh_token });
     } else {
-      return res
-        .status(500)
-        .json({
-          auth: false,
-          message: "Failed to authenticate token. [Access]",
-        });
+      return res.status(500).json({
+        auth: false,
+        message: "Failed to authenticate token. [Access]",
+      });
     }
   });
 });

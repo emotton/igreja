@@ -3,7 +3,7 @@ const router = express.Router();
 const { param, body, validationResult } = require("express-validator");
 const _ = require("underscore");
 
-const { verifyJWT } = require("../../helpers/authAPI");
+const { tokenJWT } = require("../../helpers/authAPI");
 
 const dizimoService = require("../../services/dizimoService");
 
@@ -12,7 +12,7 @@ router.get(
   param("mes")
     .isLength({ min: 6, max: 6 })
     .withMessage("Ano e mês deve ser informado AAAAMM"),
-  verifyJWT,
+  tokenJWT,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -30,6 +30,7 @@ router.get(
   param("mes")
     .isLength({ min: 6, max: 6 })
     .withMessage("Ano e mês deve ser informado AAAAMM"),
+  tokenJWT,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -48,6 +49,7 @@ router.post(
   body("id_familia")
     .isInt({ min: 1 })
     .withMessage("Id da familia deve ser informado"),
+  tokenJWT,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -67,6 +69,7 @@ router.post(
     .isLength({ min: 6, max: 6 })
     .withMessage("Ano e mês deve ser informado AAAAMM"),
   body("valor").isFloat().withMessage("Valor deve ser informado"),
+  tokenJWT,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -88,6 +91,7 @@ router.delete(
   body("id_familia")
     .isInt({ min: 1 })
     .withMessage("Id da familia deve ser informado"),
+  tokenJWT,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -106,6 +110,7 @@ router.patch(
   body("mes")
     .isLength({ min: 6, max: 6 })
     .withMessage("Ano e mês deve ser informado AAAAMM"),
+  tokenJWT,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -139,6 +144,7 @@ router.patch(
     .isLength({ min: 6, max: 6 })
     .withMessage("Ano e mês deve ser informado AAAAMM"),
   body("valor").isFloat().withMessage("Valor deve ser informado"),
+  tokenJWT,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

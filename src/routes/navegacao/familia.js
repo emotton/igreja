@@ -19,10 +19,23 @@ router.get("/view/:id", logged, async (req, res) => {
   let search = req.session.searchIdFamilia;
 
   const familia = await axios.get(
-    prefixUrl + apiFamiliaUrl + "/" + req.params.id
+    prefixUrl + apiFamiliaUrl + "/" + req.params.id,
+    {
+      headers: {
+        authorization: req.session.token,
+      },
+    }
   );
-  const lista = await axios.get(prefixUrl + apiFamiliaUrl);
-  const setores = await axios.get(prefixUrl + apiSetorUrl);
+  const lista = await axios.get(prefixUrl + apiFamiliaUrl, {
+    headers: {
+      authorization: req.session.token,
+    },
+  });
+  const setores = await axios.get(prefixUrl + apiSetorUrl, {
+    headers: {
+      authorization: req.session.token,
+    },
+  });
   setores.data.forEach((setor) => {
     if (setor.id_setor == familia.data.id_setor) {
       setor.CHECKED = true;
@@ -46,12 +59,24 @@ router.get("/list", logged, async (req, res) => {
 
   let lista = null;
   if (search != undefined) {
-    lista = await axios.get(prefixUrl + apiFamiliaUrl + "/search/" + search);
+    lista = await axios.get(prefixUrl + apiFamiliaUrl + "/search/" + search, {
+      headers: {
+        authorization: req.session.token,
+      },
+    });
   } else {
-    lista = await axios.get(prefixUrl + apiFamiliaUrl);
+    lista = await axios.get(prefixUrl + apiFamiliaUrl, {
+      headers: {
+        authorization: req.session.token,
+      },
+    });
   }
 
-  const setores = await axios.get(prefixUrl + apiSetorUrl);
+  const setores = await axios.get(prefixUrl + apiSetorUrl, {
+    headers: {
+      authorization: req.session.token,
+    },
+  });
   res.render(baseUrl + "/index", {
     familias: lista.data,
     setores: setores.data,
@@ -62,10 +87,23 @@ router.get("/list", logged, async (req, res) => {
 
 router.get("/edit/:id", logged, async (req, res) => {
   const familia = await axios.get(
-    prefixUrl + apiFamiliaUrl + "/" + req.params.id
+    prefixUrl + apiFamiliaUrl + "/" + req.params.id,
+    {
+      headers: {
+        authorization: req.session.token,
+      },
+    }
   );
-  const lista = await axios.get(prefixUrl + apiFamiliaUrl);
-  const setores = await axios.get(prefixUrl + apiSetorUrl);
+  const lista = await axios.get(prefixUrl + apiFamiliaUrl, {
+    headers: {
+      authorization: req.session.token,
+    },
+  });
+  const setores = await axios.get(prefixUrl + apiSetorUrl, {
+    headers: {
+      authorization: req.session.token,
+    },
+  });
   setores.data.forEach((setor) => {
     if (setor.id_setor == familia.data.id_setor) {
       setor.CHECKED = true;
@@ -81,10 +119,23 @@ router.get("/edit/:id", logged, async (req, res) => {
 
 router.get("/delete/:id", logged, async (req, res) => {
   const familia = await axios.get(
-    prefixUrl + apiFamiliaUrl + "/" + req.params.id
+    prefixUrl + apiFamiliaUrl + "/" + req.params.id,
+    {
+      headers: {
+        authorization: req.session.token,
+      },
+    }
   );
-  const lista = await axios.get(prefixUrl + apiFamiliaUrl);
-  const setores = await axios.get(prefixUrl + apiSetorUrl);
+  const lista = await axios.get(prefixUrl + apiFamiliaUrl, {
+    headers: {
+      authorization: req.session.token,
+    },
+  });
+  const setores = await axios.get(prefixUrl + apiSetorUrl, {
+    headers: {
+      authorization: req.session.token,
+    },
+  });
   setores.data.forEach((setor) => {
     if (setor.id_setor == familia.data.id_setor) {
       setor.CHECKED = true;
@@ -100,7 +151,11 @@ router.get("/delete/:id", logged, async (req, res) => {
 
 router.post("/save", logged, (req, res) => {
   axios
-    .post(prefixUrl + apiFamiliaUrl, req.body)
+    .post(prefixUrl + apiFamiliaUrl, req.body, {
+      headers: {
+        authorization: req.session.token,
+      },
+    })
     .then(() => {
       req.flash("success_msg", "Inclusão com sucesso !");
     })
@@ -123,7 +178,11 @@ router.post("/save", logged, (req, res) => {
 
 router.post("/update", logged, (req, res) => {
   axios
-    .patch(prefixUrl + apiFamiliaUrl, req.body)
+    .patch(prefixUrl + apiFamiliaUrl, req.body, {
+      headers: {
+        authorization: req.session.token,
+      },
+    })
     .then(() => {
       req.flash("success_msg", "Alteração com sucesso !");
     })
@@ -146,7 +205,11 @@ router.post("/update", logged, (req, res) => {
 
 router.post("/delete", logged, async (req, res) => {
   await axios
-    .delete(prefixUrl + apiFamiliaUrl + "/" + req.body.id_familia)
+    .delete(prefixUrl + apiFamiliaUrl + "/" + req.body.id_familia, {
+      headers: {
+        authorization: req.session.token,
+      },
+    })
     .then(() => {
       req.flash("success_msg", "Exclusão com sucesso !");
     })

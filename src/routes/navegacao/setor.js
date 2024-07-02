@@ -17,8 +17,16 @@ router.get("/reset", logged, (req, res) => {
 router.get("/view/:id", logged, async (req, res) => {
   let search = req.session.searchIdSetor;
 
-  const setor = await axios.get(prefixUrl + apiSetorUrl + "/" + req.params.id);
-  const lista = await axios.get(prefixUrl + apiSetorUrl);
+  const setor = await axios.get(prefixUrl + apiSetorUrl + "/" + req.params.id, {
+    headers: {
+      authorization: req.session.token,
+    },
+  });
+  const lista = await axios.get(prefixUrl + apiSetorUrl, {
+    headers: {
+      authorization: req.session.token,
+    },
+  });
   res.render(baseUrl + "/consultar", {
     setores: lista.data,
     setor: setor.data,
@@ -36,9 +44,17 @@ router.get("/list", logged, async (req, res) => {
 
   let lista = null;
   if (search != undefined) {
-    lista = await axios.get(prefixUrl + apiSetorUrl + "/search/" + search);
+    lista = await axios.get(prefixUrl + apiSetorUrl + "/search/" + search, {
+      headers: {
+        authorization: req.session.token,
+      },
+    });
   } else {
-    lista = await axios.get(prefixUrl + apiSetorUrl);
+    lista = await axios.get(prefixUrl + apiSetorUrl, {
+      headers: {
+        authorization: req.session.token,
+      },
+    });
   }
 
   res.render(baseUrl + "/index", {
@@ -49,8 +65,16 @@ router.get("/list", logged, async (req, res) => {
 });
 
 router.get("/edit/:id", logged, async (req, res) => {
-  const setor = await axios.get(prefixUrl + apiSetorUrl + "/" + req.params.id);
-  const lista = await axios.get(prefixUrl + apiSetorUrl);
+  const setor = await axios.get(prefixUrl + apiSetorUrl + "/" + req.params.id, {
+    headers: {
+      authorization: req.session.token,
+    },
+  });
+  const lista = await axios.get(prefixUrl + apiSetorUrl, {
+    headers: {
+      authorization: req.session.token,
+    },
+  });
   res.render(baseUrl + "/alterar", {
     setores: lista.data,
     setor: setor.data,
@@ -59,8 +83,16 @@ router.get("/edit/:id", logged, async (req, res) => {
 });
 
 router.get("/delete/:id", logged, async (req, res) => {
-  const setor = await axios.get(prefixUrl + apiSetorUrl + "/" + req.params.id);
-  const lista = await axios.get(prefixUrl + apiSetorUrl);
+  const setor = await axios.get(prefixUrl + apiSetorUrl + "/" + req.params.id, {
+    headers: {
+      authorization: req.session.token,
+    },
+  });
+  const lista = await axios.get(prefixUrl + apiSetorUrl, {
+    headers: {
+      authorization: req.session.token,
+    },
+  });
   res.render(baseUrl + "/excluir", {
     setores: lista.data,
     setor: setor.data,
@@ -70,7 +102,11 @@ router.get("/delete/:id", logged, async (req, res) => {
 
 router.post("/save", logged, (req, res) => {
   axios
-    .post(prefixUrl + apiSetorUrl, req.body)
+    .post(prefixUrl + apiSetorUrl, req.body, {
+      headers: {
+        authorization: req.session.token,
+      },
+    })
     .then(() => {
       req.flash("success_msg", "Inclusão com sucesso !");
     })
@@ -93,7 +129,11 @@ router.post("/save", logged, (req, res) => {
 
 router.post("/update", logged, (req, res) => {
   axios
-    .patch(prefixUrl + apiSetorUrl, req.body)
+    .patch(prefixUrl + apiSetorUrl, req.body, {
+      headers: {
+        authorization: req.session.token,
+      },
+    })
     .then(() => {
       req.flash("success_msg", "Alteração com sucesso !");
     })
@@ -116,7 +156,11 @@ router.post("/update", logged, (req, res) => {
 
 router.post("/delete", logged, async (req, res) => {
   await axios
-    .delete(prefixUrl + apiSetorUrl + "/" + req.body.id_setor)
+    .delete(prefixUrl + apiSetorUrl + "/" + req.body.id_setor, {
+      headers: {
+        authorization: req.session.token,
+      },
+    })
     .then(() => {
       req.flash("success_msg", "Exclusão com sucesso !");
     })

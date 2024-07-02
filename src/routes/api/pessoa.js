@@ -2,19 +2,20 @@ const express = require("express");
 const router = express.Router();
 const { body, validationResult } = require("express-validator");
 
+const { tokenJWT } = require("../../helpers/authAPI");
 const pessoaService = require("../../services/pessoaService");
 
-router.get("/", async (req, res) => {
+router.get("/", tokenJWT, async (req, res) => {
   const results = await pessoaService.selectPessoas();
   res.json(results);
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", tokenJWT, async (req, res) => {
   const results = await pessoaService.selectPessoaById(req.params.id);
   res.json(results[0]);
 });
 
-router.get("/familia/:id", async (req, res) => {
+router.get("/familia/:id", tokenJWT, async (req, res) => {
   const results = await pessoaService.selectPessoasByIdFamilia(req.params.id);
   res.json(results);
 });
@@ -27,6 +28,7 @@ router.post(
   body("nome")
     .isLength({ min: 3, max: 40 })
     .withMessage("Nome entre 3 e 40 caracteres"),
+  tokenJWT,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -48,6 +50,7 @@ router.patch(
   body("id_pessoa")
     .isInt({ min: 1 })
     .withMessage("Id Pessoa deve ser informado e numérico"),
+  tokenJWT,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -58,7 +61,7 @@ router.patch(
   }
 );
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", tokenJWT, async (req, res) => {
   const results = await pessoaService.deletePessoa(req.params.id);
   res.sendStatus(204);
 });
