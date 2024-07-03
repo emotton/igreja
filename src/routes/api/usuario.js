@@ -7,11 +7,41 @@ const usuarioService = require("../../services/usuarioService");
 
 const { logged } = require("../../helpers/logged");
 
+/**
+ * @openapi
+ * /dashboard/api/usuario:
+ *   get:
+ *      tags:
+ *        - Usuário
+ *   description: Get todos os usuários
+ *   responses:
+ *       200:
+ *         description: Success
+ *
+ */
 router.get("/", tokenJWT, async (req, res) => {
   const results = await usuarioService.selectUsuarios();
   res.json(results);
 });
 
+/**
+ * @openapi
+ * /dashboard/api/usuario/{id}:
+ *   get:
+ *      tags:
+ *        - Usuário
+ *   description: retorna um usuário
+ *   parameters:
+ *    - name: id
+ *   in: path
+ *   required: true
+ *   type: integer
+ *   responses:
+ *       200:
+ *         description: Success
+ *       401:
+ *         description: No token provided.
+ */
 router.get("/:id", tokenJWT, async (req, res) => {
   const results = await usuarioService.selectUsuarioById(req.params.id);
   res.json(results[0]);

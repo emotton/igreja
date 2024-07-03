@@ -5,6 +5,18 @@ const { body, validationResult } = require("express-validator");
 const { tokenJWT } = require("../../helpers/authAPI");
 const pessoaService = require("../../services/pessoaService");
 
+/**
+ * @openapi
+ * /dashboard/api/pessoa:
+ *   get:
+ *      tags:
+ *        - Pessoa
+ *   description: Get todas as pessoas
+ *   responses:
+ *       200:
+ *         description: Success
+ *
+ */
 router.get("/", tokenJWT, async (req, res) => {
   const results = await pessoaService.selectPessoas();
   res.json(results);

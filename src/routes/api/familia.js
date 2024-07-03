@@ -5,6 +5,18 @@ const { body, validationResult } = require("express-validator");
 const { tokenJWT } = require("../../helpers/authAPI");
 const familiaService = require("../../services/familiaService");
 
+/**
+ * @openapi
+ * /dashboard/api/familia:
+ *    get:
+ *      tags:
+ *        - Família
+ *    description: Get todas as famílias
+ *    responses:
+ *       200:
+ *         description: Success
+ *
+ */
 router.get("/", tokenJWT, async (req, res) => {
   const results = await familiaService.selectFamilias();
   res.json(results);

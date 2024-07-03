@@ -5,6 +5,41 @@ const { body, validationResult } = require("express-validator");
 const { tokenJWT } = require("../../helpers/authAPI");
 const setorService = require("../../services/setorService");
 
+/**
+ * @openapi
+ * definitions:
+ *   Setor:
+ *        type: object
+ *        required:
+ *          - nome
+ *        properties:
+ *          nome:
+ *            type: string
+ *            default: setor 1
+ *   Setores:
+ *        type: object
+ *        properties:
+ *          id_setor:
+ *            type: integer
+ *          nome:
+ *            type: string
+ */
+
+/**
+ * @openapi
+ * /dashboard/api/setor:
+ *   get:
+ *      tags:
+ *        - Setor
+ *   description: Get todos os setores
+ *   responses:
+ *       200:
+ *         description: Success
+ *         schema:
+ *           type: array
+ *           items:
+ *              $ref: '#/definitions/Setores'
+ */
 router.get("/", tokenJWT, async (req, res) => {
   const results = await setorService.selectSetores();
   res.json(results);

@@ -1,6 +1,8 @@
 require("dotenv").config();
 // Carregando modulos
 const express = require("express");
+const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerUI = require("swagger-ui-express");
 const handlebars = require("express-handlebars");
 const bodyParser = require("body-parser");
 const path = require("path");
@@ -27,6 +29,20 @@ const pessoaApi = require("./routes/api/pessoa");
 const dizimoApi = require("./routes/api/dizimo");
 
 const app = express();
+
+const optionsJS = {
+  definition: {
+    swagger: "2.0",
+    info: {
+      title: "Igreja - Library API",
+      version: "1.0.0",
+    },
+  },
+  apis: ["./src/routes/api/*.js"],
+};
+
+const swaggerDocs = swaggerJsDoc(optionsJS);
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 const passport = require("passport");
 require("./config/auth")(passport);

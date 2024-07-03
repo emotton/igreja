@@ -6,6 +6,56 @@ const jwt = require("jsonwebtoken");
 
 const usuarioService = require("../../services/usuarioService");
 
+/**
+ * @openapi
+ * definitions:
+ *   Login:
+ *        type: object
+ *        required:
+ *          - login
+ *          - senha
+ *        properties:
+ *          login:
+ *            type: string
+ *            default: emotton
+ *          senha:
+ *            type: string
+ *            default: 1234
+ *   LoginResponse:
+ *         type: object
+ *         properties:
+ *            success:
+ *               type: string
+ *            access_token:
+ *               type: string
+ *            refresh_token:
+ *               type: string
+ */
+
+/**
+ * @openapi
+ * /dashboard/api/login:
+ *   post:
+ *     tags:
+ *        - Login
+ *     description: login
+ *     produces:
+ *        - application/json
+ *     parameters:
+ *       - name: login
+ *         description: login do usuário
+ *         in: body
+ *         required: true
+ *         schema:
+ *            $ref: '#/definitions/Login'
+ *     responses:
+ *       200:
+ *         description: Success
+ *         schema:
+ *            $ref: '#/definitions/LoginResponse'
+ *       403:
+ *         description: Usuário/Senha incorretos
+ */
 router.post("/", async (req, res) => {
   const usuario = await usuarioService.selectUsuarioByLogin(req.body.login);
   if (
