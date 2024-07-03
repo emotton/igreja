@@ -96,6 +96,28 @@ router.get("/:id", tokenJWT, async (req, res) => {
   res.json(results[0]);
 });
 
+/**
+ * @openapi
+ * /dashboard/api/familia/search/{search}:
+ *   get:
+ *      tags:
+ *        - Família
+ *      description: Retorna uma família pelo search procurado no nome
+ *      parameters:
+ *          - in: path
+ *            name: search
+ *            required: true
+ *            type: string
+ *      responses:
+ *         200:
+ *            description: Success
+ *            schema:
+ *               type: array
+ *               items:
+ *                   $ref: '#/definitions/Familias'
+ *         401:
+ *            description: No token provided.
+ */
 router.get("/search/:search", tokenJWT, async (req, res) => {
   const results = await familiaService.selectFamiliaByLikeNome(
     req.params.search
@@ -103,6 +125,28 @@ router.get("/search/:search", tokenJWT, async (req, res) => {
   res.json(results);
 });
 
+/**
+ * @openapi
+ * /dashboard/api/familia:
+ *   post:
+ *      tags:
+ *        - Família
+ *      description: Incluir uma família
+ *      produces:
+ *        - application/json
+ *      parameters:
+ *       - name: família
+ *         description: família
+ *         in: body
+ *         required: true
+ *         schema:
+ *            $ref: '#/definitions/Familia'
+ *      responses:
+ *         200:
+ *            description: Success
+ *         401:
+ *            description: No token provided.
+ */
 router.post(
   "/",
   body("id_setor")
@@ -128,6 +172,28 @@ router.post(
   }
 );
 
+/**
+ * @openapi
+ * /dashboard/api/familia:
+ *   patch:
+ *      tags:
+ *        - Família
+ *      description: Alterar uma família
+ *      produces:
+ *        - application/json
+ *      parameters:
+ *       - name: família
+ *         description: família
+ *         in: body
+ *         required: true
+ *         schema:
+ *            $ref: '#/definitions/Familias'
+ *      responses:
+ *         200:
+ *            description: Success
+ *         401:
+ *            description: No token provided.
+ */
 router.patch(
   "/",
   body("id_familia")
@@ -156,6 +222,24 @@ router.patch(
   }
 );
 
+/**
+ * @openapi
+ * /dashboard/api/familia/{id}:
+ *   delete:
+ *      tags:
+ *        - Família
+ *      description: Exclui uma família pelo id
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            required: true
+ *            type: integer
+ *      responses:
+ *         200:
+ *            description: Success
+ *         401:
+ *            description: No token provided.
+ */
 router.delete("/:id", tokenJWT, async (req, res) => {
   const results = await familiaService.deleteFamilia(req.params.id);
   res.sendStatus(204);

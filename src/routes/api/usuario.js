@@ -31,12 +31,16 @@ const { logged } = require("../../helpers/logged");
  *        properties:
  *          id_usuario:
  *            type: integer
+ *            default: 1
  *          nome:
  *            type: string
+ *            default: José Pereira
  *          login:
  *            type: string
+ *            default: jose.pereira
  *          senha:
  *            type: string
+ *            default: 1234
  */
 
 /**
@@ -78,7 +82,7 @@ router.get("/", tokenJWT, async (req, res) => {
  *            description: Success
  *            schema:
  *               type: object
- *               $ref: '#/definitions/Setores'
+ *               $ref: '#/definitions/Usuários'
  *         401:
  *            description: No token provided.
  */
@@ -87,6 +91,28 @@ router.get("/:id", tokenJWT, async (req, res) => {
   res.json(results[0]);
 });
 
+/**
+ * @openapi
+ * /dashboard/api/usuario/search/{search}:
+ *   get:
+ *      tags:
+ *        - Usuário
+ *      description: Retorna um usuário pelo search procurado no nome
+ *      parameters:
+ *          - in: path
+ *            name: search
+ *            required: true
+ *            type: string
+ *      responses:
+ *         200:
+ *            description: Success
+ *            schema:
+ *               type: array
+ *               items:
+ *                   $ref: '#/definitions/Usuários'
+ *         401:
+ *            description: No token provided.
+ */
 router.get("/search/:search", tokenJWT, async (req, res) => {
   const results = await usuarioService.selectUsuarioByLikeNome(
     req.params.search
@@ -94,6 +120,28 @@ router.get("/search/:search", tokenJWT, async (req, res) => {
   res.json(results);
 });
 
+/**
+ * @openapi
+ * /dashboard/api/usuario:
+ *   post:
+ *      tags:
+ *        - Usuário
+ *      description: Incluir um usuário
+ *      produces:
+ *        - application/json
+ *      parameters:
+ *       - name: usuário
+ *         description: usuário
+ *         in: body
+ *         required: true
+ *         schema:
+ *            $ref: '#/definitions/Usuário'
+ *      responses:
+ *         200:
+ *            description: Success
+ *         401:
+ *            description: No token provided.
+ */
 router.post(
   "/",
   body("login")
@@ -123,6 +171,28 @@ router.post(
   }
 );
 
+/**
+ * @openapi
+ * /dashboard/api/usuario:
+ *   patch:
+ *      tags:
+ *        - Usuário
+ *      description: Alterar um usuário
+ *      produces:
+ *        - application/json
+ *      parameters:
+ *       - name: usuário
+ *         description: usuário
+ *         in: body
+ *         required: true
+ *         schema:
+ *            $ref: '#/definitions/Usuários'
+ *      responses:
+ *         200:
+ *            description: Success
+ *         401:
+ *            description: No token provided.
+ */
 router.patch(
   "/",
   body("login")
@@ -156,6 +226,24 @@ router.patch(
   }
 );
 
+/**
+ * @openapi
+ * /dashboard/api/usuario/{id}:
+ *   delete:
+ *      tags:
+ *        - Usuário
+ *      description: Exclui um usuário pelo id
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            required: true
+ *            type: integer
+ *      responses:
+ *         200:
+ *            description: Success
+ *         401:
+ *            description: No token provided.
+ */
 router.delete("/:id", tokenJWT, async (req, res) => {
   const results = await usuarioService.deleteUsuario(req.params.id);
   res.sendStatus(204);

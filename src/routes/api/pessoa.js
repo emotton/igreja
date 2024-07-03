@@ -11,8 +11,12 @@ const pessoaService = require("../../services/pessoaService");
  *   Pessoa:
  *        type: object
  *        required:
+ *          - id_familia
  *          - nome
  *        properties:
+ *          id_familia:
+ *            type: integer
+ *            default: 1
  *          nome:
  *            type: string
  *            default: Jose Carlos Pereira
@@ -73,11 +77,55 @@ router.get("/:id", tokenJWT, async (req, res) => {
   res.json(results[0]);
 });
 
+/**
+ * @openapi
+ * /dashboard/api/pessoa/familia/{id_familia}:
+ *   get:
+ *      tags:
+ *        - Pessoa
+ *      description: Retorna pessoas pelo id_familia
+ *      parameters:
+ *          - in: path
+ *            name: id_familia
+ *            required: true
+ *            type: integer
+ *      responses:
+ *         200:
+ *            description: Success
+ *            schema:
+ *              type: array
+ *              items:
+ *                $ref: '#/definitions/Pessoas'
+ *         401:
+ *            description: No token provided.
+ */
 router.get("/familia/:id", tokenJWT, async (req, res) => {
   const results = await pessoaService.selectPessoasByIdFamilia(req.params.id);
   res.json(results);
 });
 
+/**
+ * @openapi
+ * /dashboard/api/pessoa:
+ *   post:
+ *      tags:
+ *        - Pessoa
+ *      description: Incluir uma pessoa
+ *      produces:
+ *        - application/json
+ *      parameters:
+ *       - name: pessoa
+ *         description: pessoa
+ *         in: body
+ *         required: true
+ *         schema:
+ *            $ref: '#/definitions/Pessoa'
+ *      responses:
+ *         200:
+ *            description: Success
+ *         401:
+ *            description: No token provided.
+ */
 router.post(
   "/",
   body("id_familia")
@@ -97,6 +145,28 @@ router.post(
   }
 );
 
+/**
+ * @openapi
+ * /dashboard/api/pessoa:
+ *   patch:
+ *      tags:
+ *        - Pessoa
+ *      description: Alterar uma pessoa
+ *      produces:
+ *        - application/json
+ *      parameters:
+ *       - name: pessoa
+ *         description: pessoa
+ *         in: body
+ *         required: true
+ *         schema:
+ *            $ref: '#/definitions/Pessoas'
+ *      responses:
+ *         200:
+ *            description: Success
+ *         401:
+ *            description: No token provided.
+ */
 router.patch(
   "/",
   body("id_familia")
@@ -119,6 +189,24 @@ router.patch(
   }
 );
 
+/**
+ * @openapi
+ * /dashboard/api/pessoa/{id}:
+ *   delete:
+ *      tags:
+ *        - Pessoa
+ *      description: Exclui uma pessoa pelo id
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            required: true
+ *            type: integer
+ *      responses:
+ *         200:
+ *            description: Success
+ *         401:
+ *            description: No token provided.
+ */
 router.delete("/:id", tokenJWT, async (req, res) => {
   const results = await pessoaService.deletePessoa(req.params.id);
   res.sendStatus(204);

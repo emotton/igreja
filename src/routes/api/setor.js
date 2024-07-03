@@ -73,11 +73,55 @@ router.get("/:id", tokenJWT, async (req, res) => {
   res.json(results[0]);
 });
 
+/**
+ * @openapi
+ * /dashboard/api/setor/search/{search}:
+ *   get:
+ *      tags:
+ *        - Setor
+ *      description: Retorna um setor pelo search procurado no nome
+ *      parameters:
+ *          - in: path
+ *            name: search
+ *            required: true
+ *            type: string
+ *      responses:
+ *         200:
+ *            description: Success
+ *            schema:
+ *               type: array
+ *               items:
+ *                   $ref: '#/definitions/Setores'
+ *         401:
+ *            description: No token provided.
+ */
 router.get("/search/:search", tokenJWT, async (req, res) => {
   const results = await setorService.selectSetorByLikeNome(req.params.search);
   res.json(results);
 });
 
+/**
+ * @openapi
+ * /dashboard/api/setor:
+ *   post:
+ *      tags:
+ *        - Setor
+ *      description: Incluir um setor
+ *      produces:
+ *        - application/json
+ *      parameters:
+ *       - name: setor
+ *         description: setor
+ *         in: body
+ *         required: true
+ *         schema:
+ *            $ref: '#/definitions/Setor'
+ *      responses:
+ *         200:
+ *            description: Success
+ *         401:
+ *            description: No token provided.
+ */
 router.post(
   "/",
   body("nome")
@@ -94,6 +138,28 @@ router.post(
   }
 );
 
+/**
+ * @openapi
+ * /dashboard/api/setor:
+ *   patch:
+ *      tags:
+ *        - Setor
+ *      description: Alterar um setor
+ *      produces:
+ *        - application/json
+ *      parameters:
+ *       - name: setor
+ *         description: setor
+ *         in: body
+ *         required: true
+ *         schema:
+ *            $ref: '#/definitions/Setores'
+ *      responses:
+ *         200:
+ *            description: Success
+ *         401:
+ *            description: No token provided.
+ */
 router.patch(
   "/",
   body("nome")
@@ -113,6 +179,24 @@ router.patch(
   }
 );
 
+/**
+ * @openapi
+ * /dashboard/api/setor/{id}:
+ *   delete:
+ *      tags:
+ *        - Setor
+ *      description: Exclui um setor pelo id
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            required: true
+ *            type: integer
+ *      responses:
+ *         200:
+ *            description: Success
+ *         401:
+ *            description: No token provided.
+ */
 router.delete("/:id", tokenJWT, async (req, res) => {
   const results = await setorService.deleteSetor(req.params.id);
   res.sendStatus(204);
