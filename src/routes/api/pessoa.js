@@ -36,6 +36,8 @@ const pessoaService = require("../../services/pessoaService");
  *      tags:
  *        - Pessoa
  *      description: Retorna todas as pessoas
+ *      security:
+ *        - APIKeyHeader: []
  *      responses:
  *        200:
  *          description: Success
@@ -63,6 +65,8 @@ router.get("/", tokenJWT, async (req, res) => {
  *            name: id
  *            required: true
  *            type: integer
+ *      security:
+ *        - APIKeyHeader: []
  *      responses:
  *         200:
  *            description: Success
@@ -89,6 +93,8 @@ router.get("/:id", tokenJWT, async (req, res) => {
  *            name: id_familia
  *            required: true
  *            type: integer
+ *      security:
+ *        - APIKeyHeader: []
  *      responses:
  *         200:
  *            description: Success
@@ -120,6 +126,8 @@ router.get("/familia/:id", tokenJWT, async (req, res) => {
  *         required: true
  *         schema:
  *            $ref: '#/definitions/Pessoa'
+ *      security:
+ *        - APIKeyHeader: []
  *      responses:
  *         200:
  *            description: Success
@@ -161,6 +169,8 @@ router.post(
  *         required: true
  *         schema:
  *            $ref: '#/definitions/Pessoas'
+ *      security:
+ *        - APIKeyHeader: []
  *      responses:
  *         200:
  *            description: Success
@@ -201,6 +211,8 @@ router.patch(
  *            name: id
  *            required: true
  *            type: integer
+ *      security:
+ *        - APIKeyHeader: []
  *      responses:
  *         200:
  *            description: Success

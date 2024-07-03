@@ -55,6 +55,8 @@ const familiaService = require("../../services/familiaService");
  *      tags:
  *        - Família
  *      description: Retorna todas as famílias
+ *      security:
+ *        - APIKeyHeader: []
  *      responses:
  *        200:
  *          description: Success
@@ -82,6 +84,8 @@ router.get("/", tokenJWT, async (req, res) => {
  *            name: id
  *            required: true
  *            type: integer
+ *      security:
+ *        - APIKeyHeader: []
  *      responses:
  *        200:
  *          description: Success
@@ -108,6 +112,8 @@ router.get("/:id", tokenJWT, async (req, res) => {
  *            name: search
  *            required: true
  *            type: string
+ *      security:
+ *        - APIKeyHeader: []
  *      responses:
  *         200:
  *            description: Success
@@ -141,6 +147,8 @@ router.get("/search/:search", tokenJWT, async (req, res) => {
  *         required: true
  *         schema:
  *            $ref: '#/definitions/Familia'
+ *      security:
+ *        - APIKeyHeader: []
  *      responses:
  *         200:
  *            description: Success
@@ -188,6 +196,8 @@ router.post(
  *         required: true
  *         schema:
  *            $ref: '#/definitions/Familias'
+ *      security:
+ *        - APIKeyHeader: []
  *      responses:
  *         200:
  *            description: Success
@@ -234,6 +244,8 @@ router.patch(
  *            name: id
  *            required: true
  *            type: integer
+ *      security:
+ *        - APIKeyHeader: []
  *      responses:
  *         200:
  *            description: Success

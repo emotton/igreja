@@ -41,6 +41,11 @@ const { logged } = require("../../helpers/logged");
  *          senha:
  *            type: string
  *            default: 1234
+ * securityDefinitions:
+ *   APIKeyHeader:
+ *     type: apiKey
+ *     in: header
+ *     name: authorization
  */
 
 /**
@@ -50,6 +55,8 @@ const { logged } = require("../../helpers/logged");
  *      tags:
  *        - Usuário
  *      description: Retorna todos os usuários
+ *      security:
+ *        - APIKeyHeader: []
  *      responses:
  *         200:
  *            description: Success
@@ -77,6 +84,8 @@ router.get("/", tokenJWT, async (req, res) => {
  *            name: id
  *            required: true
  *            type: integer
+ *      security:
+ *        - APIKeyHeader: []
  *      responses:
  *         200:
  *            description: Success
@@ -103,6 +112,8 @@ router.get("/:id", tokenJWT, async (req, res) => {
  *            name: search
  *            required: true
  *            type: string
+ *      security:
+ *        - APIKeyHeader: []
  *      responses:
  *         200:
  *            description: Success
@@ -136,6 +147,8 @@ router.get("/search/:search", tokenJWT, async (req, res) => {
  *         required: true
  *         schema:
  *            $ref: '#/definitions/Usuário'
+ *      security:
+ *        - APIKeyHeader: []
  *      responses:
  *         200:
  *            description: Success
@@ -187,6 +200,8 @@ router.post(
  *         required: true
  *         schema:
  *            $ref: '#/definitions/Usuários'
+ *      security:
+ *        - APIKeyHeader: []
  *      responses:
  *         200:
  *            description: Success
@@ -238,6 +253,8 @@ router.patch(
  *            name: id
  *            required: true
  *            type: integer
+ *      security:
+ *        - APIKeyHeader: []
  *      responses:
  *         200:
  *            description: Success
