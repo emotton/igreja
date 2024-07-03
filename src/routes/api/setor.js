@@ -31,20 +31,43 @@ const setorService = require("../../services/setorService");
  *   get:
  *      tags:
  *        - Setor
- *   description: Get todos os setores
- *   responses:
- *       200:
- *         description: Success
- *         schema:
- *           type: array
- *           items:
- *              $ref: '#/definitions/Setores'
+ *      description: Retorna todos os setores
+ *      responses:
+ *         200:
+ *            description: Success
+ *            schema:
+ *               type: array
+ *               items:
+ *                   $ref: '#/definitions/Setores'
+ *         401:
+ *            description: No token provided.
  */
 router.get("/", tokenJWT, async (req, res) => {
   const results = await setorService.selectSetores();
   res.json(results);
 });
 
+/**
+ * @openapi
+ * /dashboard/api/setor/{id}:
+ *   get:
+ *      tags:
+ *        - Setor
+ *      description: Retorna um setor pelo id
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            required: true
+ *            type: integer
+ *      responses:
+ *         200:
+ *            description: Success
+ *            schema:
+ *               type: object
+ *               $ref: '#/definitions/Setores'
+ *         401:
+ *            description: No token provided.
+ */
 router.get("/:id", tokenJWT, async (req, res) => {
   const results = await setorService.selectSetorById(req.params.id);
   res.json(results[0]);

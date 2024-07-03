@@ -7,21 +7,90 @@ const familiaService = require("../../services/familiaService");
 
 /**
  * @openapi
+ * definitions:
+ *   Familia:
+ *        type: object
+ *        required:
+ *          - id_setor
+ *          - nome
+ *          - endereco
+ *          - numero
+ *        properties:
+ *          id_setor:
+ *            type: integer
+ *            default: 1
+ *          nome:
+ *            type: string
+ *            default: Jose Carlos Pereira
+ *          endereco:
+ *            type: string
+ *            default: Rua José Pereira da Silva
+ *          numero:
+ *            type: string
+ *            default: 123
+ *   Familias:
+ *        type: object
+ *        properties:
+ *          id_familia:
+ *            type: integer
+ *            default: 1
+ *          id_setor:
+ *            type: integer
+ *            default: 1
+ *          nome:
+ *            type: string
+ *            default: Família Costa
+ *          endereco:
+ *            type: string
+ *            default: Rua Pereira da Silva
+ *          numero:
+ *            type: string
+ *            default: 1234
+ */
+
+/**
+ * @openapi
  * /dashboard/api/familia:
- *    get:
+ *   get:
  *      tags:
  *        - Família
- *    description: Get todas as famílias
- *    responses:
- *       200:
- *         description: Success
- *
+ *      description: Retorna todas as famílias
+ *      responses:
+ *        200:
+ *          description: Success
+ *          schema:
+ *            type: array
+ *            items:
+ *              $ref: '#/definitions/Familias'
+ *        401:
+ *          description: No token provided.
  */
 router.get("/", tokenJWT, async (req, res) => {
   const results = await familiaService.selectFamilias();
   res.json(results);
 });
 
+/**
+ * @openapi
+ * /dashboard/api/familia/{id}:
+ *   get:
+ *      tags:
+ *        - Família
+ *      description: Retorna uma família pelo id
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            required: true
+ *            type: integer
+ *      responses:
+ *        200:
+ *          description: Success
+ *          schema:
+ *            type: object
+ *            $ref: '#/definitions/Familias'
+ *        401:
+ *          description: No token provided.
+ */
 router.get("/:id", tokenJWT, async (req, res) => {
   const results = await familiaService.selectFamiliaById(req.params.id);
   res.json(results[0]);

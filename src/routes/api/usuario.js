@@ -9,15 +9,52 @@ const { logged } = require("../../helpers/logged");
 
 /**
  * @openapi
+ * definitions:
+ *   Usuário:
+ *        type: object
+ *        required:
+ *          - nome
+ *          - login
+ *          - senha
+ *        properties:
+ *          nome:
+ *            type: string
+ *            default: Jose Carlos Pereira
+ *          login:
+ *            type: string
+ *            default: jcarlos
+ *          senha:
+ *            type: string
+ *            default: 123456
+ *   Usuários:
+ *        type: object
+ *        properties:
+ *          id_usuario:
+ *            type: integer
+ *          nome:
+ *            type: string
+ *          login:
+ *            type: string
+ *          senha:
+ *            type: string
+ */
+
+/**
+ * @openapi
  * /dashboard/api/usuario:
  *   get:
  *      tags:
  *        - Usuário
- *   description: Get todos os usuários
- *   responses:
- *       200:
- *         description: Success
- *
+ *      description: Retorna todos os usuários
+ *      responses:
+ *         200:
+ *            description: Success
+ *            schema:
+ *               type: array
+ *               items:
+ *                   $ref: '#/definitions/Usuários'
+ *         401:
+ *            description: No token provided.
  */
 router.get("/", tokenJWT, async (req, res) => {
   const results = await usuarioService.selectUsuarios();
@@ -30,17 +67,20 @@ router.get("/", tokenJWT, async (req, res) => {
  *   get:
  *      tags:
  *        - Usuário
- *   description: retorna um usuário
- *   parameters:
- *    - name: id
- *   in: path
- *   required: true
- *   type: integer
- *   responses:
- *       200:
- *         description: Success
- *       401:
- *         description: No token provided.
+ *      description: Retorna um usuário pelo id
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            required: true
+ *            type: integer
+ *      responses:
+ *         200:
+ *            description: Success
+ *            schema:
+ *               type: object
+ *               $ref: '#/definitions/Setores'
+ *         401:
+ *            description: No token provided.
  */
 router.get("/:id", tokenJWT, async (req, res) => {
   const results = await usuarioService.selectUsuarioById(req.params.id);
