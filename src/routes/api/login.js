@@ -8,6 +8,15 @@ const usuarioService = require("../../services/usuarioService");
 
 /**
  * @openapi
+ * securityDefinitions:
+ *   APIKeyHeader:
+ *     type: apiKey
+ *     in: header
+ *     name: authorization
+ */
+
+/**
+ * @openapi
  * definitions:
  *   Login:
  *        type: object

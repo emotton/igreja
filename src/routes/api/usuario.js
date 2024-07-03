@@ -41,11 +41,6 @@ const { logged } = require("../../helpers/logged");
  *          senha:
  *            type: string
  *            default: 1234
- * securityDefinitions:
- *   APIKeyHeader:
- *     type: apiKey
- *     in: header
- *     name: authorization
  */
 
 /**
