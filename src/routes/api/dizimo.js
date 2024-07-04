@@ -7,6 +7,69 @@ const { tokenJWT } = require("../../helpers/authAPI");
 
 const dizimoService = require("../../services/dizimoService");
 
+/**
+ * @openapi
+ * definitions:
+ *   Dizimo_Lista:
+ *        type: object
+ *        properties:
+ *          id_familia:
+ *            type: integer
+ *            default: 1
+ *          nome:
+ *            type: string
+ *            default: Maria do Carmo Pereira
+ *          status:
+ *            type: string
+ *            default: Pago
+ *   Dizimo_Valor:
+ *        type: object
+ *        properties:
+ *          mes:
+ *            type: string
+ *            default: 202407
+ *          valor:
+ *            type: float
+ *            default: 12000.00
+ *   Dizimo_Id_Familia:
+ *        type: object
+ *        properties:
+ *          mes:
+ *            type: string
+ *            default: 202407
+ *          id_familia:
+ *            type: integer
+ *            default: 1
+ *   Dizimo_Ids_Familia:
+ *        type: object
+ *        properties:
+ *          mes:
+ *            type: string
+ *            default: 202407
+ *          id_familia:
+ *            type: string
+ *            default: [1,2,3]
+ */
+
+/**
+ * @openapi
+ * /dashboard/api/dizimo/{mes}:
+ *   get:
+ *      tags:
+ *        - Dizimo
+ *      description: Retorna uma lista com todos as famílias, setando quem pagou
+ *      security:
+ *        - APIKeyHeader: []
+ *      responses:
+ *        200:
+ *          description: Success
+ *          schema:
+ *            type: array
+ *            items:
+ *               $ref: '#/definitions/Dizimo_Lista'
+ *        401:
+ *          description: No token provided.
+ */
 router.get(
   "/:mes",
   param("mes")
@@ -25,6 +88,30 @@ router.get(
   }
 );
 
+/**
+ * @openapi
+ * /dashboard/api/dizimo/{mes}/valor:
+ *   get:
+ *      tags:
+ *        - Dizimo
+ *      description: Retorna o valor total de dizimo no mês
+ *      parameters:
+ *          - in: path
+ *            name: mes
+ *            required: true
+ *            type: string
+ *            default: 202407
+ *      security:
+ *        - APIKeyHeader: []
+ *      responses:
+ *        200:
+ *          description: Success
+ *          schema:
+ *            type: object
+ *            $ref: '#/definitions/Dizimo_Valor'
+ *        401:
+ *          description: No token provided.
+ */
 router.get(
   "/:mes/valor",
   param("mes")
@@ -41,6 +128,29 @@ router.get(
   }
 );
 
+/**
+ * @openapi
+ * /dashboard/api/dizimo:
+ *   post:
+ *      tags:
+ *          - Dizimo
+ *      description: Incluir a indicação de que a família pagou
+ *      produces:
+ *        - application/json
+ *      parameters:
+ *        - name: Dizimo_Id_Familia
+ *          description: Id_Familia
+ *          in: body
+ *          schema:
+ *            $ref: '#/definitions/Dizimo_Id_Familia'
+ *      security:
+ *        - APIKeyHeader: []
+ *      responses:
+ *        201:
+ *          description: Success
+ *        401:
+ *          description: No token provided.
+ */
 router.post(
   "/",
   body("mes")
@@ -63,6 +173,29 @@ router.post(
   }
 );
 
+/**
+ * @openapi
+ * /dashboard/api/dizimo/valor:
+ *   post:
+ *      tags:
+ *          - Dizimo
+ *      description: Incluir valor total do Mês
+ *      produces:
+ *        - application/json
+ *      parameters:
+ *        - name: Dizimo_Valor
+ *          description: Dizimo Valor
+ *          in: body
+ *          schema:
+ *            $ref: '#/definitions/Dizimo_Valor'
+ *      security:
+ *        - APIKeyHeader: []
+ *      responses:
+ *        201:
+ *          description: Success
+ *        401:
+ *          description: No token provided.
+ */
 router.post(
   "/valor",
   body("mes")
@@ -83,6 +216,30 @@ router.post(
   }
 );
 
+/**
+ * @openapi
+ * /dashboard/api/dizimo:
+ *   delete:
+ *      tags:
+ *          - Dizimo
+ *
+ *      description: Excluir a indicação de que a família pagou
+ *      produces:
+ *        - application/json
+ *      parameters:
+ *        - name: Dizimo_Id_Familia
+ *          description: Id_Familia
+ *          in: body
+ *          schema:
+ *            $ref: '#/definitions/Dizimo_Id_Familia'
+ *      security:
+ *        - APIKeyHeader: []
+ *      responses:
+ *        204:
+ *          description: Success
+ *        401:
+ *          description: No token provided.
+ */
 router.delete(
   "/",
   body("mes")
@@ -105,6 +262,29 @@ router.delete(
   }
 );
 
+/**
+ * @openapi
+ * /dashboard/api/dizimo:
+ *   patch:
+ *      tags:
+ *          - Dizimo
+ *      description: Atualizar famílias que efetuaram pagamento no mês
+ *      produces:
+ *        - application/json
+ *      parameters:
+ *        - name: Dizimo_Ids_Familias
+ *          description: Dizimo Ids Familias
+ *          in: body
+ *          schema:
+ *            $ref: '#/definitions/Dizimo_Ids_Familia'
+ *      security:
+ *        - APIKeyHeader: []
+ *      responses:
+ *        200:
+ *          description: Success
+ *        401:
+ *          description: No token provided.
+ */
 router.patch(
   "/",
   body("mes")
@@ -138,6 +318,29 @@ router.patch(
   }
 );
 
+/**
+ * @openapi
+ * /dashboard/api/dizimo/valor:
+ *   patch:
+ *      tags:
+ *          - Dizimo
+ *      description: Alterar valor total do Mês
+ *      produces:
+ *        - application/json
+ *      parameters:
+ *        - name: Dizimo_Valor
+ *          description: Dizimo Valor
+ *          in: body
+ *          schema:
+ *            $ref: '#/definitions/Dizimo_Valor'
+ *      security:
+ *        - APIKeyHeader: []
+ *      responses:
+ *        200:
+ *          description: Success
+ *        401:
+ *          description: No token provided.
+ */
 router.patch(
   "/valor",
   body("mes")
